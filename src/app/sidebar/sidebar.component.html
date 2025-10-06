@@ -1,18 +1,56 @@
-<nav class="sidebar">
-  <ul>
-    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-    <li>
-      <a routerLink="/office-seats" routerLinkActive="active">Office Seats</a>
+<div
+  class="sidebar d-flex flex-column vh-100 bg-light p-3 justify-content-center"
+>
+  <div class="mb-4 text-center">
+    <img
+      src="assets/logo.png"
+      alt="Logo"
+      class="img-fluid"
+      style="max-height: 60px"
+    />
+  </div>
+
+  <ul class="nav flex-column mb-auto mt-5">
+    <li class="nav-item mb-2 align-items-center justify-content-center d-flex">
+      <div class="dropdown">
+        <button
+          class="btn text-start fw-light py-3 dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Book Now
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+        </ul>
+      </div>
     </li>
-    <li>
-      <a routerLink="/conference-rooms" routerLinkActive="active"
-        >Conference Rooms</a
-      >
-    </li>
-    <li>
-      <a routerLink="/my-bookings" routerLinkActive="active">My Bookings</a>
-    </li>
-    <li><a routerLink="/weather" routerLinkActive="active">Weather</a></li>
-    <li><a routerLink="/traffic-info" routerLinkActive="active">Traffic</a></li>
+
+    <app-button-sidebar label="Home" link="/home"></app-button-sidebar>
+    <app-button-sidebar label="Home" link="/home"></app-button-sidebar>
+    <app-button-sidebar label="Home" link="/home"></app-button-sidebar>
   </ul>
-</nav>
+
+  <div class="mt-auto">
+    <div class="card text-center d-flex align-items-center">
+      <div class="row">
+        <div class="col">
+          <img
+            src="assets/user.jpg"
+            class="card-img-top rounded-circle mx-auto mt-3"
+            style="width: 60px"
+            alt="User"
+          />
+        </div>
+        <div class="col">
+          <div class="card-body p-2">
+            <h6 class="card-title mb-0">John Doe</h6>
+            <p class="card-text"><small>Admin</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
