@@ -27,3 +27,12 @@
   background-color: #dff1ff;
   border: none;
 }
+
+
+.icon-16 { width: 16px; height: 16px; }
+.icon-18 { width: 18px; height: 18px; }
+.icon-22 { width: 22px; height: 22px; }
+.icon-28 { width: 28px; height: 28px; }
+.icon-40 { width: 40px; height: 40px; }
+
+.accent-warning { filter: saturate(1) brightness(1); } /* păstrează portocaliul din SVG */
