@@ -1,7 +1,12 @@
+html,
 body {
   font-family: "Inter";
+  background-color: #fff;
+  overflow-y: hidden;
 }
 .main-content {
-  margin-left: 200px;
+  margin-left: 300px;
   flex: 1;
+  overflow: hidden;
+  height: 100vh;
 }

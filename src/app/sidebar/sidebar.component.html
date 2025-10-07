@@ -1,7 +1,7 @@
 <div
   class="sidebar d-flex flex-column vh-100 bg-light p-3 justify-content-center"
 >
-  <div class="mb-4 text-center">
+  <div class="mb-5 text-center">
     <img
       src="airline_seat_recline_normal_RoundedFill.svg"
       alt="Logo"
@@ -17,26 +17,49 @@
   </div>
 
   <ul class="nav flex-column mb-auto mt-1">
-    <li class="nav-item mb-2 align-items-center justify-content-center d-flex">
-      <div class="dropdown">
+    <li
+      class="nav-item mb-2 align-items-center justify-content-center d-flex flex-column"
+    >
+      <button
+        class="btn text-start fw-light py-3"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#bookNowMenu"
+        aria-expanded="false"
+        aria-controls="bookNowMenu"
+      >
+        Book Now &#9662;
+      </button>
+      <div class="collapse mt-2" id="bookNowMenu">
         <button
-          class="btn text-start fw-light py-3 dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
+          class="btn btn-sm w-100 mb-1"
+          routerLink="/office-seats"
+          routerLinkActive="active"
         >
-          Book Now
+          Office Seats
         </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-        </ul>
+        <button
+          class="btn btn-sm w-100"
+          routerLink="/conference-rooms"
+          routerLinkActive="active"
+        >
+          Conference Rooms
+        </button>
       </div>
     </li>
 
-    <app-button-sidebar label="My Bookings" link="/home"></app-button-sidebar>
-    <app-button-sidebar label="My Bookings" link="/home"></app-button-sidebar>
-    <app-button-sidebar label="My Bookings" link="/home"></app-button-sidebar>
+    <app-button-sidebar
+      label="My Bookings"
+      link="/my-bookings"
+    ></app-button-sidebar>
+    <app-button-sidebar
+      label="Weather Info"
+      link="/weather"
+    ></app-button-sidebar>
+    <app-button-sidebar
+      label="Traffic Info"
+      link="/traffic-info"
+    ></app-button-sidebar>
   </ul>
 
   <div class="mt-auto">
