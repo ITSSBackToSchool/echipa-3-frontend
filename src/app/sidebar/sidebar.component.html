@@ -3,14 +3,20 @@
 >
   <div class="mb-4 text-center">
     <img
-      src="assets/logo.png"
+      src="airline_seat_recline_normal_RoundedFill.svg"
       alt="Logo"
       class="img-fluid"
-      style="max-height: 60px"
+      style="height: 100px"
+    />
+    <img
+      src="/Book Your Seat.svg"
+      alt="Logo"
+      class="img-fluid"
+      style="height: 100px"
     />
   </div>
 
-  <ul class="nav flex-column mb-auto mt-5">
+  <ul class="nav flex-column mb-auto mt-1">
     <li class="nav-item mb-2 align-items-center justify-content-center d-flex">
       <div class="dropdown">
         <button
@@ -28,26 +34,29 @@
       </div>
     </li>
 
-    <app-button-sidebar label="Home" link="/home"></app-button-sidebar>
-    <app-button-sidebar label="Home" link="/home"></app-button-sidebar>
-    <app-button-sidebar label="Home" link="/home"></app-button-sidebar>
+    <app-button-sidebar label="My Bookings" link="/home"></app-button-sidebar>
+    <app-button-sidebar label="My Bookings" link="/home"></app-button-sidebar>
+    <app-button-sidebar label="My Bookings" link="/home"></app-button-sidebar>
   </ul>
 
   <div class="mt-auto">
     <div class="card text-center d-flex align-items-center">
       <div class="row">
-        <div class="col">
+        <div class="col align-items-center justify-content-center d-flex px-0">
           <img
-            src="assets/user.jpg"
-            class="card-img-top rounded-circle mx-auto mt-3"
-            style="width: 60px"
+            src="poza_gri.jpg"
+            class="card-img-top rounded-circle"
+            style="width: 90px; height: 90px"
             alt="User"
           />
         </div>
-        <div class="col">
-          <div class="card-body p-2">
-            <h6 class="card-title mb-0">John Doe</h6>
-            <p class="card-text"><small>Admin</small></p>
+        <div class="col text-start ps-0" style="width: 200px">
+          <div class="card-body">
+            <h5 class="card-title">Cosmin Gheorghe</h5>
+            <p class="fw-light mb-0 fs-6"><small>cosmin&email.com</small></p>
+            <a href="/"
+              ><p class="card-text"><small>Vezi profilul</small></p></a
+            >
           </div>
         </div>
       </div>
