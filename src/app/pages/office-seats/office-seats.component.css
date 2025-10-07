@@ -13,9 +13,43 @@
   height: 15%;
   color: #f3f4f6;
 }
+.text-legend {
+  color: #4b5563;
+}
+.middle-card {
+  height: 60%;
+}
 .card {
   background-color: #4b5563;
   height: 100%;
   border-radius: 30px;
   overflow: hidden;
+}
+.card.card-seats {
+  box-shadow: 5px 10px 8px rgba(0, 0, 0, 0.6);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+
+.color-box {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.color-box.available {
+  background-color: green;
+}
+
+.color-box.selected {
+  background-color: orange;
+}
+
+.color-box.unavailable {
+  background-color: red;
 }

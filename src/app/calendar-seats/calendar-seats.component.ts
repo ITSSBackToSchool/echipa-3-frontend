@@ -1,23 +1,18 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, model } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { provideAnimations } from '@angular/platform-browser/animations';
 
+/** @title Datepicker inline calendar example */
 @Component({
-  selector: 'app-calendar-seats',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-  ],
+  selector: 'app-calendar-seats-component',
   templateUrl: './calendar-seats.component.html',
+  styleUrl: './calendar-seats.component.css',
+  providers: [provideNativeDateAdapter()],
+  standalone: true,
+  imports: [MatCardModule, MatDatepickerModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarSeatsComponent {
-  date: Date | null = null;
+  selected = model<Date | null>(null);
 }

@@ -1,4 +1,15 @@
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-calendar-body-selected {
+  background-color: orange !important;
+  color: #4b5563;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.demo-inline-calendar-card {
+  width: 300px;
+}
