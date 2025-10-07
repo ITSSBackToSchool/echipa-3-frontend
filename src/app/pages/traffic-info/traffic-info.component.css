@@ -1,1 +1,29 @@
-:host ::ng-deep .p-card { background: transparent; }
+.container {
+  height: 100vh;
+}
+
+.main {
+  background-color: #f3f4f6;
+  padding: 2rem;
+  height: 100%;
+  box-shadow: 15px 10px 5px rgba(0, 0, 0, 0.6);
+  border-radius: 30px;
+}
+
+/* 🟦 Panoul Plan your route */
+.plan-route-card {
+  background-color: #dff1ff;
+  border: none;
+}
+
+/* 🟦 Travel summary strip */
+.summary-strip {
+  background-color: #dff1ff;
+  border: none;
+}
+
+/* 🟦 Boxurile mici pentru incidente */
+.incident-card {
+  background-color: #dff1ff;
+  border: none;
+}
