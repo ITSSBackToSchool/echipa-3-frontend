@@ -1,0 +1,11 @@
+<p-card styleClass="bg-soft-blue round-xl border-0 h-full">
+  <div class="flex align-items-start gap-3">
+    <i class="{{icon}} text-3xl" [ngStyle]="{color: iconColor}"></i>
+    <div>
+      <div class="font-semibold"> {{ title }} </div>
+      <ul class="mt-2 mb-0">
+        <li *ngFor="let b of bullets" class="mb-1">{{ b }}</li>
+      </ul>
+    </div>
+  </div>
+</p-card>

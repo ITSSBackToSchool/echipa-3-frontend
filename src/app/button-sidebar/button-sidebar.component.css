@@ -4,3 +4,6 @@
 .btn:hover {
   background-color: #f59e0b;
 }
+a.btn {
+  white-space: nowrap;
+}
