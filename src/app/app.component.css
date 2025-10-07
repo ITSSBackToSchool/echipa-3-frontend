@@ -1,0 +1,7 @@
+body {
+  font-family: "Inter";
+}
+.main-content {
+  margin-left: 200px;
+  flex: 1;
+}

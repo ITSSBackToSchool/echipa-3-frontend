@@ -1,18 +1,65 @@
-<nav class="sidebar">
-  <ul>
-    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-    <li>
-      <a routerLink="/office-seats" routerLinkActive="active">Office Seats</a>
+<div
+  class="sidebar d-flex flex-column vh-100 bg-light p-3 justify-content-center"
+>
+  <div class="mb-4 text-center">
+    <img
+      src="airline_seat_recline_normal_RoundedFill.svg"
+      alt="Logo"
+      class="img-fluid"
+      style="height: 100px"
+    />
+    <img
+      src="/Book Your Seat.svg"
+      alt="Logo"
+      class="img-fluid"
+      style="height: 100px"
+    />
+  </div>
+
+  <ul class="nav flex-column mb-auto mt-1">
+    <li class="nav-item mb-2 align-items-center justify-content-center d-flex">
+      <div class="dropdown">
+        <button
+          class="btn text-start fw-light py-3 dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Book Now
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+        </ul>
+      </div>
     </li>
-    <li>
-      <a routerLink="/conference-rooms" routerLinkActive="active"
-        >Conference Rooms</a
-      >
-    </li>
-    <li>
-      <a routerLink="/my-bookings" routerLinkActive="active">My Bookings</a>
-    </li>
-    <li><a routerLink="/weather" routerLinkActive="active">Weather</a></li>
-    <li><a routerLink="/traffic-info" routerLinkActive="active">Traffic</a></li>
+
+    <app-button-sidebar label="My Bookings" link="/home"></app-button-sidebar>
+    <app-button-sidebar label="My Bookings" link="/home"></app-button-sidebar>
+    <app-button-sidebar label="My Bookings" link="/home"></app-button-sidebar>
   </ul>
-</nav>
+
+  <div class="mt-auto">
+    <div class="card text-center d-flex align-items-center">
+      <div class="row">
+        <div class="col align-items-center justify-content-center d-flex px-0">
+          <img
+            src="poza_gri.jpg"
+            class="card-img-top rounded-circle"
+            style="width: 90px; height: 90px"
+            alt="User"
+          />
+        </div>
+        <div class="col text-start ps-0" style="width: 200px">
+          <div class="card-body">
+            <h5 class="card-title">Cosmin Gheorghe</h5>
+            <p class="fw-light mb-0 fs-6"><small>cosmin&email.com</small></p>
+            <a href="/"
+              ><p class="card-text"><small>Vezi profilul</small></p></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,5 +7,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   standalone: true,
   imports: [RouterModule, RouterOutlet, SidebarComponent],
   templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
 })
 export class AppComponent {}
