@@ -1,15 +1,18 @@
 <div class="container p-4">
   <div class="main">
 
-    <!-- Header -->
-    <header class="mb-4">
-      <h1 class="fw-semibold mb-1">Traffic info</h1>
-      <p class="text-muted m-0">Verific timpul și rutele către birou</p>
+    <!-- Header în gradient (tema Weather) -->
+    <header class="traffic-header mb-4">
+      <div>
+        <h1 class="traffic-title fw-semibold mb-1">Traffic info</h1>
+        <p class="traffic-subtle m-0">Verific timpul și rutele către birou</p>
+      </div>
+      <!-- (opțional) poți adăuga un icon mare aici, dacă vrei consistență cu soarele din Weather -->
     </header>
 
     <!-- Plan your route -->
-    <section class="plan-route-card p-4 rounded-4 mb-4 shadow-sm">
-      <h5 class="fw-semibold mb-3">Plan your route</h5>
+    <section class="plan-route-card p-4 mb-4">
+      <h5 class="fw-semibold mb-3" style="color:#415064">Plan your route</h5>
 
       <div class="mb-3">
         <!-- My Location -->
@@ -36,12 +39,12 @@
     </section>
 
     <!-- Travel summary strip -->
-    <section class="summary-strip p-4 rounded-4 mb-4 d-flex align-items-center justify-content-between shadow-sm">
+    <section class="summary-strip p-4 mb-4 d-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center gap-3">
         <img src="assets/icons/car.svg" alt="Car" style="width:40px;height:auto" loading="lazy">
-        <div class="fs-2 fw-semibold">21 min</div>
+        <div class="fs-2 fw-semibold" style="color:#415064">21 min</div>
       </div>
-      <div class="fs-3 fw-semibold d-flex align-items-center gap-2">
+      <div class="fs-3 fw-semibold d-flex align-items-center gap-2" style="color:#415064">
         <img src="assets/icons/bookmark_check_RoundedFill.svg" alt="Distance OK" style="width:22px;height:22px" loading="lazy">
         10.1km
       </div>
@@ -51,14 +54,14 @@
     <section class="row g-4">
       <!-- Incident 1 -->
       <div class="col-12 col-md-6">
-        <div class="incident-card p-4 rounded-4 h-100 shadow-sm">
+        <div class="incident-card p-4 h-100">
           <div class="d-flex align-items-start gap-3">
             <img src="assets/icons/warning_RoundedFill.svg" alt="Warning" style="width:28px;height:28px" loading="lazy">
             <div>
-              <div class="fw-semibold">Traffic diverted at Unirii Square</div>
+              <div class="fw-semibold" style="color:#415064">Traffic diverted at Unirii Square</div>
               <ul class="mb-0 ps-3">
-                <li class="text-muted">12 min – Reported 5 min ago</li>
-                <li class="text-muted">1,1 km ahead</li>
+                <li class="traffic-muted">12 min – Reported 5 min ago</li>
+                <li class="traffic-muted">1,1 km ahead</li>
               </ul>
             </div>
           </div>
@@ -67,14 +70,14 @@
 
       <!-- Incident 2 -->
       <div class="col-12 col-md-6">
-        <div class="incident-card p-4 rounded-4 h-100 shadow-sm">
+        <div class="incident-card p-4 h-100">
           <div class="d-flex align-items-start gap-3">
             <img src="assets/icons/airline_stops_RoundedFill.svg" alt="Diversion" style="width:28px;height:28px" loading="lazy">
             <div>
-              <div class="fw-semibold">Road diversion on Unirii Boulevard</div>
+              <div class="fw-semibold" style="color:#415064">Road diversion on Unirii Boulevard</div>
               <ul class="mb-0 ps-3">
-                <li class="text-muted">+5 min – Reported 30 min ago</li>
-                <li class="text-muted">900 m ahead</li>
+                <li class="traffic-muted">+5 min – Reported 30 min ago</li>
+                <li class="traffic-muted">900 m ahead</li>
               </ul>
             </div>
           </div>
