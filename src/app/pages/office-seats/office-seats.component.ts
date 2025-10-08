@@ -6,13 +6,7 @@ import { ButtonConfirmComponent } from '../../button-confirm/button-confirm.comp
 @Component({
   selector: 'app-office-seats',
   standalone: true,
-  imports: [
-    CalendarSeatsComponent,
-    SeatSelectorComponent,
-    CommonModule,
-    ButtonConfirmComponent,
-    ButtonConfirmComponent,
-  ],
+  imports: [CalendarSeatsComponent, SeatSelectorComponent, CommonModule],
   templateUrl: './office-seats.component.html',
   styleUrl: './office-seats.component.css',
 })
