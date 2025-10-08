@@ -7,7 +7,27 @@
       <div class="col-8 card">
         <app-room-selector></app-room-selector>
       </div>
-      <div class="col-4" style="background-color: pink">camere</div>
+      <div class="col-4">
+        <div
+          class="row m-0 d-flex align-items-center justify-content-center"
+          style="height: 50%"
+        >
+          <div class="col-auto">
+            <app-calendar-conference-component></app-calendar-conference-component>
+          </div>
+        </div>
+        <div class="row m-0 p-4">
+          <app-selector-ore></app-selector-ore>
+        </div>
+        <div class="row m-0" style="height: 10%">
+          <div class="col-6 ps-4">
+            <button type="button" class="btn btn-reset">Reset</button>
+          </div>
+          <div class="col-6 text-end pe-4">
+            <button type="button" class="btn btn-confirm">Confirm</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

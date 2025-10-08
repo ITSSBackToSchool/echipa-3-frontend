@@ -1,0 +1,13 @@
+<div
+  class="card card-ore overflow-auto p-3"
+  style="height: 200px; background-color: #4b5563"
+>
+  <div
+    class="card mt-2"
+    *ngFor="let ora of ore; let i = index"
+    [ngClass]="{ selected: isSelected(i) }"
+    (click)="toggleSelection(i)"
+  >
+    {{ ora }}
+  </div>
+</div>

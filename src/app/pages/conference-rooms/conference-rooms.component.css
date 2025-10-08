@@ -8,3 +8,23 @@
 .container {
   height: 100vh;
 }
+.btn-confirm {
+  color: #f3f4f6;
+  background-color: #4b5563;
+  width: 70%;
+}
+.btn-confirm:hover {
+  color: #f3f4f6;
+  background-color: #f59e0b;
+  transition: 0.3s all ease;
+}
+.btn-reset {
+  color: #4b5563;
+  border-color: #4b5563;
+  width: 70%;
+}
+.btn-reset:hover {
+  color: #f3f4f6;
+  background-color: #4b5563;
+  transition: 0.3s all ease;
+}

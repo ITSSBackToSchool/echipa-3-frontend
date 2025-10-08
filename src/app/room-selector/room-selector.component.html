@@ -4,8 +4,8 @@
       <div class="d-grid gap-4 mt-4 justify-content-center">
         <div
           *ngFor="let card of [1, 2, 3, 4, 5]"
-          class="card mb-3"
-          style="max-width: 750px"
+          class="card"
+          style="max-width: 750px; border-radius: 20px"
         >
           <div class="row g-0">
             <div class="col-md-4">
@@ -23,11 +23,17 @@
                   lead-in to additional content. This content is a little bit
                   longer.
                 </p>
-                <p class="card-text">
-                  <small class="text-body-secondary"
-                    >Last updated 3 mins ago</small
-                  >
-                </p>
+                <div class="row justify-content-end">
+                  <div class="col-9"></div>
+                  <div class="col-3">
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary w-100"
+                    >
+                      Select
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -45,10 +51,10 @@
           style="max-width: 750px"
         >
           <div class="row g-0">
-            <div class="col-md-4">
+            <div class="col-md-4 card-img-container">
               <img
                 src="pexels-quark-studio-1159039-3201921.jpg"
-                class="img-fluid rounded-start"
+                class="img-fluid d-block"
                 alt="..."
               />
             </div>
