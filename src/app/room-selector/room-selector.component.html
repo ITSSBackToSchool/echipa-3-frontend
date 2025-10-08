@@ -1,0 +1,109 @@
+<mat-tab-group class="vertical-scroll-tabs">
+  <mat-tab label="Parter">
+    <div class="tab-content">
+      <div class="d-grid gap-4 mt-4 justify-content-center">
+        <div
+          *ngFor="let card of [1, 2, 3, 4, 5]"
+          class="card mb-3"
+          style="max-width: 750px"
+        >
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="pexels-quark-studio-1159039-3201921.jpg"
+                class="img-fluid rounded-start"
+                alt="..."
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title {{ card }}</h5>
+                <p class="card-text">
+                  This is a wider card with supporting text below as a natural
+                  lead-in to additional content. This content is a little bit
+                  longer.
+                </p>
+                <p class="card-text">
+                  <small class="text-body-secondary"
+                    >Last updated 3 mins ago</small
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Etaj 1">
+    <div class="tab-content">
+      <div class="d-grid gap-4 mt-4 justify-content-center">
+        <div
+          *ngFor="let card of [1, 2, 3]"
+          class="card mb-3"
+          style="max-width: 750px"
+        >
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="pexels-quark-studio-1159039-3201921.jpg"
+                class="img-fluid rounded-start"
+                alt="..."
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title {{ card }}</h5>
+                <p class="card-text">
+                  This is content for tab two. It can be different for each tab.
+                </p>
+                <p class="card-text">
+                  <small class="text-body-secondary"
+                    >Last updated 5 mins ago</small
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Etaj 2">
+    <div class="tab-content">
+      <div class="d-grid gap-4 mt-4 justify-content-center">
+        <div
+          *ngFor="let card of [1, 2, 3]"
+          class="card mb-3"
+          style="max-width: 750px"
+        >
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="pexels-quark-studio-1159039-3201921.jpg"
+                class="img-fluid rounded-start"
+                alt="..."
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title {{ card }}</h5>
+                <p class="card-text">
+                  This is content for tab three. Each tab can have its own
+                  cards.
+                </p>
+                <p class="card-text">
+                  <small class="text-body-secondary"
+                    >Last updated 10 mins ago</small
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,12 @@
+.vertical-scroll-tabs {
+  height: 600px;
+}
+
+.vertical-scroll-tabs .mat-tab-body-wrapper {
+  height: calc(100% - 48px);
+  overflow-y: auto;
+}
+
+.vertical-scroll-tabs .mat-tab-body {
+  height: 100%;
+}
