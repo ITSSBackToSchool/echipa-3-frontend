@@ -45,28 +45,69 @@
         </div>
       </div>
     </div>
+
+    <!-- CARD SEATS -->
     <div class="col p-2">
       <div class="card card-seats">
         <div class="top-card d-flex align-items-center justify-content-center">
-          Choose Date
+          Choose Seat
         </div>
+
         <div
-          class="d-flex align-items-center justify-content-center"
+          class="d-flex align-items-center justify-content-center mt-3"
           style="height: 50%"
         >
           <div class="card mt-2" style="background-color: #f3f4f6; width: 70%">
-            <app-seat-selector></app-seat-selector>
+            <app-seat-selector
+              (seatSelected)="onSeatSelected($event)"
+            ></app-seat-selector>
           </div>
         </div>
+
+        <div class="align-items-center justify-content-center d-flex mt-3">
+          <h3 class="text-seats fw-normal mb-2 fw-semibold">Selected seat:</h3>
+        </div>
         <div
-          class="bottom-card d-flex justify-content-center align-items-center mt-4 mb-2"
-          style="height: 15%"
+          class="bottom-card d-flex justify-content-center align-items-center mb-2"
+          style="height: 10%"
         >
           <div
-            class="card card-legend d-grid text-center"
+            class="card card-legend d-grid"
             style="width: 70%; background-color: #f3f4f6; height: 100%"
           >
-            <h3 class="text-legend mx-2 mt-2 fw-normal">Selected Seat:</h3>
+            <div
+              class="d-flex align-items-center justify-content-center"
+              style="height: 100%"
+            >
+              <div class="row w-100">
+                <div
+                  class="col d-flex align-items-center justify-content-center"
+                  style="height: 100%"
+                >
+                  <p class="fw-semibold text-selected mb-0">
+                    Floor: {{ selectedFloor || "None" }}
+                  </p>
+                </div>
+                <div
+                  class="col d-flex align-items-center justify-content-center h-100 border-start border-2"
+                  style="height: 100%"
+                >
+                  <p class="fw-semibold text-selected mb-0">
+                    Seat: {{ selectedSeat || "None" }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-butoane">
+          <div class="row">
+            <div class="col align-items-center justify-content-center d-flex">
+              <button type="button" class="btn btn-outline-light">Light</button>
+            </div>
+            <div class="col align-items-center justify-content-center d-flex">
+              <button type="button" class="btn btn-primary">Primary</button>
+            </div>
           </div>
         </div>
       </div>

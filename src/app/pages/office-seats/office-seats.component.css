@@ -16,6 +16,9 @@
 .text-legend {
   color: #4b5563;
 }
+.text-seats {
+  color: #f3f4f6;
+}
 .middle-card {
   height: 60%;
 }
@@ -52,4 +55,7 @@
 
 .color-box.unavailable {
   background-color: red;
+}
+.text-selected {
+  color: #4b5563;
 }

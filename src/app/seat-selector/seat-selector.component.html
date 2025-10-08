@@ -1,19 +1,46 @@
-<mat-tab-group style="height: 400px">
-  <mat-tab label="First">
+<mat-tab-group (selectedTabChange)="onTabChange($event)" style="height: 400px">
+  <mat-tab label="Parter">
     <div class="container seats-container mt-2">
-      <img *ngFor="let seat of seats" src="scaun.svg" alt="scaun" />
+      <img
+        *ngFor="let seat of seats"
+        src="scaun.svg"
+        alt="scaun"
+        class="seat"
+        [ngClass]="{
+          selected: selectedSeat === seat && selectedFloor === 'Parter'
+        }"
+        (click)="selectSeat(seat)"
+      />
     </div>
   </mat-tab>
 
-  <mat-tab label="Second">
+  <mat-tab label="Etaj 1">
     <div class="container seats-container mt-2">
-      <img *ngFor="let seat of seats" src="scaun.svg" alt="scaun" />
+      <img
+        *ngFor="let seat of seats"
+        src="scaun.svg"
+        alt="scaun"
+        class="seat"
+        [ngClass]="{
+          selected: selectedSeat === seat && selectedFloor === 'Etaj 1'
+        }"
+        (click)="selectSeat(seat)"
+      />
     </div>
   </mat-tab>
 
-  <mat-tab label="Third">
+  <mat-tab label="Etaj 2">
     <div class="container seats-container mt-2">
-      <img *ngFor="let seat of seats" src="scaun.svg" alt="scaun" />
+      <img
+        *ngFor="let seat of seats"
+        src="scaun.svg"
+        alt="scaun"
+        class="seat"
+        [ngClass]="{
+          selected: selectedSeat === seat && selectedFloor === 'Etaj 2'
+        }"
+        (click)="selectSeat(seat)"
+      />
     </div>
   </mat-tab>
 </mat-tab-group>
