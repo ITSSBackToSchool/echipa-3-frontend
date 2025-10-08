@@ -13,3 +13,6 @@ body {
 .demo-inline-calendar-card {
   width: 300px;
 }
+::ng-deep .mat-ink-bar {
+  background-color: red !important;
+}
