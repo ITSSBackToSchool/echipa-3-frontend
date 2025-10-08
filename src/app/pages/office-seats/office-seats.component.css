@@ -59,3 +59,23 @@
 .text-selected {
   color: #4b5563;
 }
+.btn-confirm {
+  color: #4b5563;
+  background-color: #f3f4f6;
+  width: 50%;
+}
+.btn-confirm:hover {
+  color: #f3f4f6;
+  background-color: #f59e0b;
+  transition: 0.3s all ease;
+}
+.btn-reset {
+  color: #f3f4f6;
+  border-color: #f3f4f6;
+  width: 50%;
+}
+.btn-reset:hover {
+  color: #4b5563;
+  background-color: #f3f4f6;
+  transition: 0.3s all ease;
+}
