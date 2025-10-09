@@ -5,53 +5,71 @@
   height: 100vh;
 }
 
-/* Card principal – identic cu .weather-card */
+/* Card principal */
 .main {
-  background: #ffffff;                          /* din weather-card */
-  border-radius: 18px;                          /* 18px ca la weather */
-  padding: 24px;                                /* 24px ca la weather */
-  box-shadow: 0 6px 20px rgba(0,0,0,.08);       /* umbra din weather */
+  background: #F3F4F6;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
   height: 100%;
 }
 
-/* Header cu gradient – identic cu .wc-header */
+/* Header */
 .traffic-header {
   display: flex;
   gap: 24px;
   justify-content: space-between;
   align-items: center;
   padding: 8px 8px 24px;
-  border-radius: 16px;                          /* 16px ca la wc-header */
-  background: linear-gradient(180deg, #f8fbff 0%, #f1f6fb 100%);
+  border-radius: 16px;
+  background: #F3F4F6;
 }
 
-/* Tipografie derivată */
+/* Tipografie */
 .traffic-title {
-  font-size: clamp(20px, 3.2vw, 40px);
+  font-size: clamp(28px, 3.2vw, 40px);
   margin: 0 0 8px;
   font-weight: 600;
 }
-.traffic-subtle { color: #637084; }            /* .wc-condition */
-.traffic-muted  { color: #6b7a8c; }            /* substatistici */
-.traffic-secondary { color: #7b8797; }         /* min/max */
+.traffic-subtle    { color: #637084; }
+.traffic-muted     { color: #6b7a8c; }
+.traffic-secondary { color: #7b8797; }
 
-/* Carduri “stat” (plan route / summary / incident) – ca .wc-stat */
+/* Baza cardurilor (fără blur; fără offset implicit) */
 .plan-route-card,
 .summary-strip,
 .incident-card {
-  background: #eaf5ff;                          /* exact ca .wc-stat */
-  border: none;
-  border-radius: 14px;                          /* 14px ca .wc-stat */
-  box-shadow:
-    inset 0 0 0 1px rgba(0,0,0,.03),
-    0 8px 18px rgba(0,0,0,.04);                 /* shadow din .wc-stat */
+  background: #eaf5ff;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.03);
+  position: relative;
+  overflow: visible;
+  box-shadow: none; /* IMPORTANT: fără umbră by default */
 }
 
-/* Păstrează utilitățile pentru iconuri */
+/* === UMBRE ===== */
+
+/* Doar "Plan your route" are umbră offset, discretă */
+.plan-route-card {
+  box-shadow: 9px 9px 4px rgba(0,0,0,0.25);
+}
+
+/* Warning-urile NU au umbră deloc (forțăm override, în caz că ai utilitare aplicate) */
+.incident-card,
+.incident-card.offset-shadow,
+.incident-card.offset-shadow--sm,
+.incident-card.offset-shadow--lg {
+  box-shadow: none !important;
+}
+
+/* Summary strip rămâne plat */
+.summary-strip { box-shadow: none; }
+
+/* Icon utilities */
 .icon-16 { width: 16px; height: 16px; }
 .icon-18 { width: 18px; height: 18px; }
 .icon-22 { width: 22px; height: 22px; }
 .icon-28 { width: 28px; height: 28px; }
 .icon-40 { width: 40px; height: 40px; }
 
-.accent-warning { filter: saturate(1) brightness(1); } /* păstrează portocaliul din SVG */
+.accent-warning { filter: saturate(1) brightness(1); }
