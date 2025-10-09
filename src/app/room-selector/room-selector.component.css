@@ -1,5 +1,5 @@
 .vertical-scroll-tabs {
-  height: 600px;
+  height: 620px;
 }
 
 .vertical-scroll-tabs .mat-tab-body-wrapper {
@@ -19,4 +19,13 @@
   width: 100%;
   object-fit: cover;
   display: block;
+}
+.btn {
+  border-color: #4b5563;
+  color: #4b5563;
+}
+.btn:hover {
+  background-color: #4b5563;
+  color: #f3f4f6;
+  transition: all 0.3s ease;
 }
