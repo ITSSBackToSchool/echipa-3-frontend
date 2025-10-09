@@ -64,7 +64,13 @@ export class OfficeSeatsComponent {
     const url = 'http://localhost:8080/reservations/seats';
     console.log('POST reservation', url, body);
     this.http.post(url, body).subscribe({
-      next: (res) => alert(`Reservation succes: ${res}`),
+      next: (res) => {
+        alert('Reservation success!');
+
+        if (this.selectedRangeStart && this.selectedRangeEnd) {
+          this.fetchSeatData(this.selectedRangeStart, this.selectedRangeEnd);
+        }
+      },
       error: (err) => alert(`Error occured: ${err}`),
     });
   }
