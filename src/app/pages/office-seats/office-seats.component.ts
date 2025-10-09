@@ -21,6 +21,8 @@ export class OfficeSeatsComponent {
   selectedDate: Date | null = null;
   selectedFloor: string | null = null;
   selectedSeat: number | null = null;
+  selectedRangeStart: string | null = null;
+  selectedRangeEnd: string | null = null;
 
   seatData: Record<string, { seat: number; isOccupied: boolean }[]> = {};
 
@@ -37,7 +39,34 @@ export class OfficeSeatsComponent {
   onDateRangeSelected(range: { start: string; end: string }) {
     // store selectedDate as Date for local usage if needed
     this.selectedDate = new Date(range.start);
+    this.selectedRangeStart = range.start;
+    this.selectedRangeEnd = range.end;
     this.fetchSeatData(range.start, range.end);
+  }
+
+  confirmReservation() {
+    if (
+      !this.selectedSeat ||
+      !this.selectedRangeStart ||
+      !this.selectedRangeEnd
+    ) {
+      console.error('Missing selected seat or date range for reservation');
+      return;
+    }
+
+    const body = {
+      userId: 1,
+      seatIds: [this.selectedSeat],
+      reservationDateStart: this.selectedRangeStart + ':00',
+      reservationDateEnd: this.selectedRangeEnd + ':00',
+    };
+
+    const url = 'http://localhost:8080/reservations/seats';
+    console.log('POST reservation', url, body);
+    this.http.post(url, body).subscribe({
+      next: (res) => alert(`Reservation succes: ${res}`),
+      error: (err) => alert(`Error occured: ${err}`),
+    });
   }
 
   onSeatSelected(event: { floor: string; seat: number }) {
@@ -46,7 +75,6 @@ export class OfficeSeatsComponent {
   }
 
   fetchSeatData(dateStart: string, dateEnd: string) {
-    // dateStart and dateEnd are already formatted as YYYY-MM-DDTHH:mm
     const start = dateStart;
     const end = dateEnd;
 
