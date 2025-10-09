@@ -2,14 +2,24 @@
   <mat-tab label="Parter">
     <div class="container seats-container mt-2">
       <img
-        *ngFor="let seat of seats"
-        src="scaun.svg"
-        alt="scaun"
+        *ngFor="let seatObj of seatData.Parter"
+        [src]="
+          seatObj.isOccupied ?? seatObj.occupied
+            ? 'scaun_rosu.svg'
+            : 'scaun.svg'
+        "
+        [alt]="'scaun-' + (seatObj.seat ?? seatObj.seatNumber ?? seatObj.id)"
         class="seat"
         [ngClass]="{
-          selected: selectedSeat === seat && selectedFloor === 'Parter'
+          selected:
+            selectedSeat ===
+              (seatObj.id ?? seatObj.seat ?? seatObj.seatNumber) &&
+            selectedFloor === 'Parter',
+          occupied: seatObj.isOccupied ?? seatObj.occupied
         }"
-        (click)="selectSeat(seat)"
+        (click)="
+          selectSeat('Parter', seatObj.id ?? seatObj.seat ?? seatObj.seatNumber)
+        "
       />
     </div>
   </mat-tab>
@@ -17,14 +27,24 @@
   <mat-tab label="Etaj 1">
     <div class="container seats-container mt-2">
       <img
-        *ngFor="let seat of seats"
-        src="scaun.svg"
-        alt="scaun"
+        *ngFor="let seatObj of seatData['Etaj 1']"
+        [src]="
+          seatObj.isOccupied ?? seatObj.occupied
+            ? 'scaun_rosu.svg'
+            : 'scaun.svg'
+        "
+        [alt]="'scaun-' + (seatObj.seat ?? seatObj.seatNumber ?? seatObj.id)"
         class="seat"
         [ngClass]="{
-          selected: selectedSeat === seat && selectedFloor === 'Etaj 1'
+          selected:
+            selectedSeat ===
+              (seatObj.id ?? seatObj.seat ?? seatObj.seatNumber) &&
+            selectedFloor === 'Etaj 1',
+          occupied: seatObj.isOccupied ?? seatObj.occupied
         }"
-        (click)="selectSeat(seat)"
+        (click)="
+          selectSeat('Etaj 1', seatObj.id ?? seatObj.seat ?? seatObj.seatNumber)
+        "
       />
     </div>
   </mat-tab>
@@ -32,14 +52,24 @@
   <mat-tab label="Etaj 2">
     <div class="container seats-container mt-2">
       <img
-        *ngFor="let seat of seats"
-        src="scaun.svg"
-        alt="scaun"
+        *ngFor="let seatObj of seatData['Etaj 2']"
+        [src]="
+          seatObj.isOccupied ?? seatObj.occupied
+            ? 'scaun_rosu.svg'
+            : 'scaun.svg'
+        "
+        [alt]="'scaun-' + (seatObj.seat ?? seatObj.seatNumber ?? seatObj.id)"
         class="seat"
         [ngClass]="{
-          selected: selectedSeat === seat && selectedFloor === 'Etaj 2'
+          selected:
+            selectedSeat ===
+              (seatObj.id ?? seatObj.seat ?? seatObj.seatNumber) &&
+            selectedFloor === 'Etaj 2',
+          occupied: seatObj.isOccupied ?? seatObj.occupied
         }"
-        (click)="selectSeat(seat)"
+        (click)="
+          selectSeat('Etaj 2', seatObj.id ?? seatObj.seat ?? seatObj.seatNumber)
+        "
       />
     </div>
   </mat-tab>

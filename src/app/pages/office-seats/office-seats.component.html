@@ -15,7 +15,9 @@
           <div
             class="middle-card d-flex justify-content-center align-items-center mt-2"
           >
-            <app-calendar-seats-component></app-calendar-seats-component>
+            <app-calendar-seats-component
+              (dateSelected)="onDateRangeSelected($event)"
+            ></app-calendar-seats-component>
           </div>
           <div
             class="bottom-card d-flex justify-content-center align-items-center mt-2 mb-2"
@@ -77,6 +79,8 @@
               style="background-color: #f3f4f6; width: 70%"
             >
               <app-seat-selector
+                [seatData]="seatData"
+                [selectedDate]="selectedDate"
                 (seatSelected)="onSeatSelected($event)"
               ></app-seat-selector>
             </div>

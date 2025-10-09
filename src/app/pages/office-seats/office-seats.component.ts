@@ -3,20 +3,79 @@ import { CalendarSeatsComponent } from '../../calendar-seats/calendar-seats.comp
 import { SeatSelectorComponent } from '../../seat-selector/seat-selector.component';
 import { CommonModule } from '@angular/common';
 import { ButtonConfirmComponent } from '../../button-confirm/button-confirm.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-office-seats',
   standalone: true,
-  imports: [CalendarSeatsComponent, SeatSelectorComponent, CommonModule],
+  imports: [
+    CalendarSeatsComponent,
+    SeatSelectorComponent,
+    CommonModule,
+    HttpClientModule,
+  ],
   templateUrl: './office-seats.component.html',
-  styleUrl: './office-seats.component.css',
+  styleUrls: ['./office-seats.component.css'],
 })
 export class OfficeSeatsComponent {
-  date: Date[] | undefined;
+  selectedDate: Date | null = null;
   selectedFloor: string | null = null;
   selectedSeat: number | null = null;
+
+  seatData: Record<string, { seat: number; isOccupied: boolean }[]> = {};
+
+  constructor(private http: HttpClient) {}
+
+  formatDate(date: Date): string {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
+      date.getDate()
+    )}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  }
+
+  // receive start and end of the day (formatted strings) from calendar
+  onDateRangeSelected(range: { start: string; end: string }) {
+    // store selectedDate as Date for local usage if needed
+    this.selectedDate = new Date(range.start);
+    this.fetchSeatData(range.start, range.end);
+  }
 
   onSeatSelected(event: { floor: string; seat: number }) {
     this.selectedFloor = event.floor;
     this.selectedSeat = event.seat;
+  }
+
+  fetchSeatData(dateStart: string, dateEnd: string) {
+    // dateStart and dateEnd are already formatted as YYYY-MM-DDTHH:mm
+    const start = dateStart;
+    const end = dateEnd;
+
+    const floorMap: Record<string, number> = {
+      Parter: 1,
+      'Etaj 1': 2,
+      'Etaj 2': 3,
+    };
+
+    for (const floor in floorMap) {
+      const floorId = floorMap[floor];
+      console.log('Floor id:', floorId);
+      console.log('Date start:', start);
+      console.log('Date end:', end);
+      const url = `http://localhost:8080/seats/freeSeats?floorId=${floorId}&dateStart=${start}&dateEnd=${end}`;
+      console.log('Apel API:', url);
+
+      this.http.get(url).subscribe({
+        next: (data) => {
+          console.log(`Răspuns API pentru ${floor}:`, data);
+          this.seatData[floor] = data as {
+            seat: number;
+            isOccupied: boolean;
+          }[];
+        },
+        error: (err) => {
+          console.error(`Eroare API pentru ${floor}:`, err);
+        },
+      });
+    }
   }
 }

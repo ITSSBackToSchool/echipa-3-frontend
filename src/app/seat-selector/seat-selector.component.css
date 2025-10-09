@@ -22,7 +22,7 @@
   filter: brightness(1.2);
 }
 
-.selected {
+.seat.selected {
   border: 2px solid #f59e0b;
   border-radius: 8px;
   background-color: #f3f4f6;
