@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CalendarSeatsComponent } from '../../calendar-seats/calendar-seats.component';
 import { SeatSelectorComponent } from '../../seat-selector/seat-selector.component';
 import { CommonModule } from '@angular/common';
@@ -26,6 +26,8 @@ export class OfficeSeatsComponent {
 
   seatData: Record<string, { seat: number; isOccupied: boolean }[]> = {};
 
+  @ViewChild(SeatSelectorComponent) seatSelector?: SeatSelectorComponent;
+
   constructor(private http: HttpClient) {}
 
   formatDate(date: Date): string {
@@ -35,9 +37,7 @@ export class OfficeSeatsComponent {
     )}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
   }
 
-  // receive start and end of the day (formatted strings) from calendar
   onDateRangeSelected(range: { start: string; end: string }) {
-    // store selectedDate as Date for local usage if needed
     this.selectedDate = new Date(range.start);
     this.selectedRangeStart = range.start;
     this.selectedRangeEnd = range.end;
@@ -78,6 +78,23 @@ export class OfficeSeatsComponent {
   onSeatSelected(event: { floor: string; seat: number }) {
     this.selectedFloor = event.floor;
     this.selectedSeat = event.seat;
+  }
+
+  resetSelection() {
+    this.selectedSeat = null;
+    this.selectedFloor = null;
+    if (this.seatSelector) this.seatSelector.clearSelection();
+
+    const now = new Date();
+    const start = new Date(now);
+    start.setHours(0, 0, 0, 0);
+    const end = new Date(now);
+    end.setHours(23, 59, 0, 0);
+    this.selectedRangeStart = this.formatDate(start);
+    this.selectedRangeEnd = this.formatDate(end);
+    this.selectedDate = start;
+
+    this.fetchSeatData(this.selectedRangeStart, this.selectedRangeEnd);
   }
 
   fetchSeatData(dateStart: string, dateEnd: string) {

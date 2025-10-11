@@ -60,4 +60,10 @@ export class SeatSelectorComponent {
     const labels: FloorName[] = ['Parter', 'Etaj 1', 'Etaj 2'];
     this.selectedFloor = labels[event.index];
   }
+
+  // allow parent to clear the current selection
+  clearSelection() {
+    this.selectedSeat = null;
+    this.selectedFloor = 'Parter';
+  }
 }
