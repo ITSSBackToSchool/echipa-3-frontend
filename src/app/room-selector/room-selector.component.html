@@ -1,9 +1,103 @@
 <mat-tab-group class="vertical-scroll-tabs">
   <mat-tab label="Parter">
     <div class="tab-content">
+      <div class="row mt-2 justify-content-center">
+        <div class="col-5 d-flex justify-content-center">
+          <button
+            type="button"
+            class="btn btn-confirm btn-building btn-lg"
+            [ngClass]="{ 'on-click': selectedBuilding === 'T1' }"
+            (click)="selectBuilding('T1')"
+          >
+            Building T1
+          </button>
+        </div>
+        <div class="col-5 d-flex justify-content-center">
+          <button
+            type="button"
+            class="btn btn-confirm btn-building btn-lg"
+            [ngClass]="{ 'on-click': selectedBuilding === 'T2' }"
+            (click)="selectBuilding('T2')"
+          >
+            Building T2
+          </button>
+        </div>
+      </div>
+
       <div class="d-grid gap-4 mt-4 justify-content-center">
         <div
-          *ngFor="let card of [1, 2, 3, 4, 5]"
+          *ngFor="let card of cards"
+          class="card"
+          style="
+            max-width: 750px;
+            border-radius: 20px;
+            background-color: #e0f2fe;
+          "
+        >
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="poza-lounge.jpg"
+                class="img-fluid rounded-start"
+                alt="..."
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h3 class="card-title">Titlu camera: {{ card }}</h3>
+                <p class="card-text">Number of seats: seatsNumber</p>
+                <div class="row justify-content-end">
+                  <div class="col-9"></div>
+                  <div class="col-3">
+                    <button
+                      type="button"
+                      class="btn w-100"
+                      [ngClass]="{
+                        'on-click':
+                          selectedCardFloor === 'Parter' &&
+                          selectedCardNumber === card
+                      }"
+                      (click)="selectCard('Parter', card)"
+                    >
+                      Select
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Etaj 1">
+    <div class="tab-content">
+      <div class="row mt-2 justify-content-center">
+        <div class="col-5 d-flex justify-content-center">
+          <button
+            type="button"
+            class="btn btn-confirm btn-building btn-lg"
+            [ngClass]="{ 'on-click': selectedBuilding === 'T1' }"
+            (click)="selectBuilding('T1')"
+          >
+            Building T1
+          </button>
+        </div>
+        <div class="col-5 d-flex justify-content-center">
+          <button
+            type="button"
+            class="btn btn-confirm btn-building btn-lg"
+            [ngClass]="{ 'on-click': selectedBuilding === 'T2' }"
+            (click)="selectBuilding('T2')"
+          >
+            Building T2
+          </button>
+        </div>
+      </div>
+      <div class="d-grid gap-4 mt-4 justify-content-center">
+        <div
+          *ngFor="let card of cards"
           class="card"
           style="
             max-width: 750px;
@@ -30,7 +124,18 @@
                 <div class="row justify-content-end">
                   <div class="col-9"></div>
                   <div class="col-3">
-                    <button type="button" class="btn w-100">Select</button>
+                    <button
+                      type="button"
+                      class="btn w-100"
+                      [ngClass]="{
+                        'on-click':
+                          selectedCardFloor === 'Etaj 1' &&
+                          selectedCardNumber === card
+                      }"
+                      (click)="selectCard('Etaj 1', card)"
+                    >
+                      Select
+                    </button>
                   </div>
                 </div>
               </div>
@@ -41,49 +146,44 @@
     </div>
   </mat-tab>
 
-  <mat-tab label="Etaj 1">
-    <div class="tab-content">
-      <div class="d-grid gap-4 mt-4 justify-content-center">
-        <div
-          *ngFor="let card of [1, 2, 3]"
-          class="card mb-3"
-          style="max-width: 750px"
-        >
-          <div class="row g-0">
-            <div class="col-md-4 card-img-container">
-              <img src="poza-lounge.jpg" class="img-fluid d-block" alt="..." />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Card title {{ card }}</h5>
-                <p class="card-text">
-                  This is content for tab two. It can be different for each tab.
-                </p>
-                <p class="card-text">
-                  <small class="text-body-secondary"
-                    >Last updated 5 mins ago</small
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </mat-tab>
-
   <mat-tab label="Etaj 2">
     <div class="tab-content">
+      <div class="row mt-2 justify-content-center">
+        <div class="col-5 d-flex justify-content-center">
+          <button
+            type="button"
+            class="btn btn-confirm btn-building btn-lg"
+            [ngClass]="{ 'on-click': selectedBuilding === 'T1' }"
+            (click)="selectBuilding('T1')"
+          >
+            Building T1
+          </button>
+        </div>
+        <div class="col-5 d-flex justify-content-center">
+          <button
+            type="button"
+            class="btn btn-confirm btn-building btn-lg"
+            [ngClass]="{ 'on-click': selectedBuilding === 'T2' }"
+            (click)="selectBuilding('T2')"
+          >
+            Building T2
+          </button>
+        </div>
+      </div>
       <div class="d-grid gap-4 mt-4 justify-content-center">
         <div
-          *ngFor="let card of [1, 2, 3]"
-          class="card mb-3"
-          style="max-width: 750px"
+          *ngFor="let card of cards"
+          class="card"
+          style="
+            max-width: 750px;
+            border-radius: 20px;
+            background-color: #e0f2fe;
+          "
         >
           <div class="row g-0">
             <div class="col-md-4">
               <img
-                src="pexels-quark-studio-1159039-3201921.jpg"
+                src="poza-lounge.jpg"
                 class="img-fluid rounded-start"
                 alt="..."
               />
@@ -92,14 +192,27 @@
               <div class="card-body">
                 <h5 class="card-title">Card title {{ card }}</h5>
                 <p class="card-text">
-                  This is content for tab three. Each tab can have its own
-                  cards.
+                  This is a wider card with supporting text below as a natural
+                  lead-in to additional content. This content is a little bit
+                  longer.
                 </p>
-                <p class="card-text">
-                  <small class="text-body-secondary"
-                    >Last updated 10 mins ago</small
-                  >
-                </p>
+                <div class="row justify-content-end">
+                  <div class="col-9"></div>
+                  <div class="col-3">
+                    <button
+                      type="button"
+                      class="btn w-100"
+                      [ngClass]="{
+                        'on-click':
+                          selectedCardFloor === 'Etaj 2' &&
+                          selectedCardNumber === card
+                      }"
+                      (click)="selectCard('Etaj 2', card)"
+                    >
+                      Select
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

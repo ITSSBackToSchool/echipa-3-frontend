@@ -29,3 +29,14 @@
   color: #f3f4f6;
   transition: all 0.3s ease;
 }
+.on-click {
+  background-color: #4b5563;
+  color: #f3f4f6;
+}
+.btn-building {
+  width: 100%;
+}
+
+.tab-content {
+  overflow-x: hidden;
+}

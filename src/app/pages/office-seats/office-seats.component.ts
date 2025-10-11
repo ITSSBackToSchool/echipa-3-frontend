@@ -64,14 +64,19 @@ export class OfficeSeatsComponent {
     const url = 'http://localhost:8080/reservations/seats';
     console.log('POST reservation', url, body);
     this.http.post(url, body).subscribe({
-      next: (res) => {
+      next: () => {
         alert('Reservation success!');
 
         if (this.selectedRangeStart && this.selectedRangeEnd) {
           this.fetchSeatData(this.selectedRangeStart, this.selectedRangeEnd);
         }
       },
-      error: (err) => alert(`Error occured: ${err}`),
+      error: () => {
+        alert(`Locul a fost deja rezervat`);
+        if (this.selectedRangeStart && this.selectedRangeEnd) {
+          this.fetchSeatData(this.selectedRangeStart, this.selectedRangeEnd);
+        }
+      },
     });
   }
 
