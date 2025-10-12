@@ -1,1 +1,44 @@
-<p>home works!</p>
+<div class="container p-4">
+  <div class="main">
+
+    <!-- === HERO (reutilizează header-ul de la weather) === -->
+    <section class="weather-card hero-card">
+      <header class="wc-header">
+        <div class="wc-header-left">
+          <h1 class="wc-city">
+            Bine ai revenit,<br />
+            <span class="fw-semibold">User</span> !
+          </h1>
+          <div class="wc-condition">Astăzi lucrezi / nu lucrezi de la birou</div>
+        </div>
+
+        <div class="wc-header-right">
+          <div class="hero-illustration">
+            <img src="/Scaun_Office.svg" alt="Office seat" />
+          </div>
+        </div>
+      </header>
+    </section>
+
+    <!-- === CARD ALBASTRU “Următoarea vizită” (schelet weather-card) === -->
+    <section class="weather-card home-card">
+      <h2 class="home-title">Următoarea ta vizită la birou:</h2>
+
+      <div class="home-visit-box">
+        <div class="home-visit-line">
+          <div class="home-visit-title">Biroul 3 - Parter</div>
+          <div class="home-visit-sub">Aleea Țibleș nr.3</div>
+        </div>
+        <div class="home-visit-line home-visit-line--split">
+          <div class="home-visit-title">9 Octombrie</div>
+          <div class="home-visit-sub home-visit-sub--caps">9AM–17PM</div>
+        </div>
+      </div>
+
+      <div class="home-cta">
+        <a class="home-btn" routerLink="/my-bookings">Vezi rezervările</a>
+      </div>
+    </section>
+
+  </div>
+</div>

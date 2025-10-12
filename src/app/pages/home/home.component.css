@@ -1,0 +1,199 @@
+:host{
+  display:block;
+  height:100vh; /* pagina full height */
+}
+
+/* Container general (identic cu weather) */
+.container{
+  height:100%;
+}
+
+.main{
+  background:#F3F4F6;            /* gri deschis */
+  border-radius:18px;
+  padding:24px;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+
+  /* pentru butonul de scroll + scroll lin */
+  position:relative;
+  overflow:auto;
+  scroll-behavior:smooth;
+}
+
+/* === Card “generic” (din weather) === */
+.weather-card{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+/* === HERO band === */
+.wc-header{
+  display:flex;
+  gap:24px;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 8px 24px;
+  border-radius:16px;
+  background: #F3F4F6;
+}
+
+.wc-city{
+  font-size:clamp(28px, 3.4vw, 44px);
+  margin:0 0 8px;
+  font-weight:800;
+  color:#3b4758;
+}
+
+.wc-condition{
+  color:#637084;
+  margin-bottom:0;
+  font-size:18px;
+}
+
+.wc-header-right{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* === Ilustrația din HERO — fără chenar/umbra/card === */
+.hero-illustration{
+  background:transparent;
+  border:none;
+  border-radius:0;
+  width:352px;       /* cerut */
+  height:352px;
+  max-width:100%;
+  box-shadow:none;
+}
+.hero-illustration img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+/* === CARD ALBASTRU (schelet weather-card) === */
+.home-card{
+  background:#e6f3ff;               /* albastru deschis */
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0px 6px 12px rgba(0,0,0,.08);
+  align-items:center;
+  text-align:center;
+
+  /* DESKTOP – dimensiunile tale curente arată bine, le păstrăm implicit
+     dar nu forțăm înălțimea pe mobil */
+  width:718px;
+  height:452px;
+  margin-inline:auto;    /* centrare orizontală */
+}
+
+/* titlu card */
+.home-title{
+  margin:0 0 18px;
+  color:#465a70;
+  font-size:22px;
+  font-weight:600;
+}
+
+/* === caseta interioară cu 2 rânduri === */
+.home-visit-box{
+  width:min(640px, 100%);
+  background:#eef4fb;
+  border:3px solid #3f4a5a;
+  border-radius:16px;
+  overflow:hidden;
+  text-align:left;
+  box-shadow:0 6px 12px rgba(0,0,0,.05);
+}
+
+.home-visit-line{
+  padding:16px 20px;
+  background:#eef4fb;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.home-visit-line--split{
+  background:#f8fbff;
+  border-top:2px solid #d2dae5;
+}
+
+.home-visit-title{ font-weight:700; color:#243346; }
+.home-visit-sub{ color:#6b7a8c; font-size:14px; }
+.home-visit-sub--caps{ text-transform:uppercase; letter-spacing:.2px; }
+
+/* === CTA buton pill — fără animații ==== */
+.home-cta{ margin-top:20px; }
+
+.home-btn{
+  display:inline-block;
+  padding:12px 26px;
+  border:none;
+  border-radius:999px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  background:linear-gradient(135deg, #2a3848, #3c4856);
+  box-shadow:0 10px 14px rgba(0,0,0,.08), 0 2px 0 rgba(0,0,0,.20) inset;
+  cursor:pointer;
+  transition:none;
+}
+.home-btn:hover{
+  background:linear-gradient(135deg, #263444, #36414f);
+  box-shadow:0 10px 14px rgba(0,0,0,.10), 0 2px 0 rgba(0,0,0,.22) inset;
+}
+.home-btn:active{
+  background:linear-gradient(135deg, #223041, #323c49);
+  box-shadow:0 8px 12px rgba(0,0,0,.12), 0 2px 0 rgba(0,0,0,.24) inset;
+}
+.home-btn:focus-visible{
+  outline:3px solid #99c9ff;
+  outline-offset:2px;
+}
+
+/* === BUTON SCROLL → CARD (vizibil doar pe ecrane mici) === */
+.scroll-btn{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:1000;
+  display:none;                 /* ascuns by default, îl arătăm doar pe small */
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:#2f3c4b;
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  box-shadow:0 8px 16px rgba(0,0,0,.15);
+}
+.scroll-btn .chevron{
+  width:18px; height:18px;
+}
+
+/* === Responsivitate: NU mai lăsăm cardul să iasă din ecran === */
+@media (max-width: 900px){
+  /* cardul devine FLUID: se micșorează și pe înălțime */
+  .home-card{
+    width: calc(100% - 32px);
+    height: auto;
+    margin-inline:16px;
+    margin-bottom:72px; /* spațiu pentru butonul fix */
+  }
+  .home-visit-box{ width:100%; }
+  .scroll-btn{ display:flex; }
+}
+
+@media (max-width: 576px){
+  .main{ padding:16px; }
+  .home-card{ padding:16px; }
+  .hero-illustration{ width:260px; height:260px; }
+}

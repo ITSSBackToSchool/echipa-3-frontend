@@ -1,0 +1,202 @@
+:host {
+  display: block;
+  height: 100vh; /* pagina full height */
+}
+
+/* Container general */
+.container {
+  height: 100%;
+}
+
+.main {
+  background: #F3F4F6;              /* alb ca la card */
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === Card general vreme === */
+.weather-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === Header (titlu + temperaturi + icon mare) === */
+.wc-header {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 8px 24px;
+  border-radius: 16px;
+  background: #F3F4F6;
+}
+
+.wc-city {
+  font-size: clamp(20px, 3.2vw, 40px);
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.wc-condition {
+  color: #637084;
+  margin-bottom: 10px;
+}
+
+.wc-temp-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.wc-temp {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.wc-temp-value {
+  font-size: clamp(48px, 7vw, 72px);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.wc-temp-unit {
+  font-size: clamp(22px, 3vw, 28px);
+  opacity: .9;
+}
+
+.wc-minmax {
+  color: #7b8797;
+  display: flex;
+  gap: 16px;
+  font-weight: 500;
+}
+
+.wc-header-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-xxl {
+  width: clamp(72px, 10vw, 120px);
+  height: auto;
+  stroke: #ffb300;
+  fill: #ffca28;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+/* === Pastilele cu zile – grilă egală === */
+.wc-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(84px, 1fr));
+  gap: 18px;
+  margin: 18px 4px 22px;
+}
+
+.wc-day {
+  background: #3d4b5f;
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 10px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,.08);
+}
+
+.wc-day .d-name {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.wc-day .d-icon {
+  display: block;
+  font-size: 18px;
+}
+
+.wc-day .d-temp {
+  display: block;
+  margin-top: 4px;
+  font-weight: 600;
+  opacity: .9;
+}
+
+/* === Statistici (mutate sub zile) === */
+.wc-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 18px;  /* în loc de auto - pentru spacing natural */
+}
+
+.wc-stat {
+  background: #eaf5ff;
+  border-radius: 14px;
+  padding: 16px;
+  position: relative;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.03),
+              0 8px 18px rgba(0,0,0,.04);
+}
+
+.wc-stat .s-title {
+  font-weight: 700;
+  color: #415064;
+}
+
+.wc-stat .s-value {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.wc-stat .s-sub {
+  color: #6b7a8c;
+}
+
+.wc-stat .s-icon {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 36px;
+  height: 36px;
+  fill: none;
+  stroke: #6b7a8c;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+/* === Responsive === */
+@media (max-width: 992px) {
+  .wc-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .wc-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wc-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .wc-days {
+    grid-template-columns: repeat(3, minmax(84px, 1fr));
+  }
+}
