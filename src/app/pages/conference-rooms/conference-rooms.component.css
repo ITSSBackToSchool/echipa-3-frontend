@@ -1,0 +1,31 @@
+.main {
+  background-color: #f3f4f6;
+  padding: 2rem;
+  height: 100%;
+  box-shadow: 15px 10px 5px rgba(0, 0, 0, 0.6);
+  border-radius: 30px;
+}
+.container {
+  height: 100vh;
+}
+
+.btn-confirm {
+  color: #f3f4f6;
+  background-color: #4b5563;
+  width: 70%;
+}
+.btn-confirm:hover {
+  color: #f3f4f6;
+  background-color: #f59e0b;
+  transition: 0.3s all ease;
+}
+.btn-reset {
+  color: #4b5563;
+  border-color: #4b5563;
+  width: 70%;
+}
+.btn-reset:hover {
+  color: #f3f4f6;
+  background-color: #4b5563;
+  transition: 0.3s all ease;
+}

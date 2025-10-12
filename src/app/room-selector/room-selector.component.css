@@ -1,0 +1,42 @@
+.vertical-scroll-tabs {
+  height: 620px;
+}
+
+.vertical-scroll-tabs .mat-tab-body-wrapper {
+  height: calc(100% - 48px);
+  overflow-y: auto;
+}
+
+.vertical-scroll-tabs .mat-tab-body {
+  height: 100%;
+}
+.card-img-container {
+  height: 100%;
+}
+
+.card-img-container img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+.btn {
+  border-color: #4b5563;
+  color: #4b5563;
+}
+.btn:hover {
+  background-color: #4b5563;
+  color: #f3f4f6;
+  transition: all 0.3s ease;
+}
+.on-click {
+  background-color: #4b5563;
+  color: #f3f4f6;
+}
+.btn-building {
+  width: 100%;
+}
+
+.tab-content {
+  overflow-x: hidden;
+}

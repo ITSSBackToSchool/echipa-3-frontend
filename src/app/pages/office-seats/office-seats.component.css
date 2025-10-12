@@ -5,6 +5,9 @@
   box-shadow: 15px 10px 5px rgba(0, 0, 0, 0.6);
   border-radius: 30px;
 }
+h1 {
+  color: #4b5563;
+}
 .container {
   height: 100vh;
 }
@@ -13,9 +16,69 @@
   height: 15%;
   color: #f3f4f6;
 }
+.text-legend {
+  color: #4b5563;
+}
+.text-seats {
+  color: #f3f4f6;
+}
+.middle-card {
+  height: 60%;
+}
 .card {
   background-color: #4b5563;
   height: 100%;
   border-radius: 30px;
   overflow: hidden;
+}
+.card.card-seats {
+  box-shadow: 5px 10px 8px rgba(0, 0, 0, 0.6);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+
+.color-box {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.color-box.available {
+  background-color: green;
+}
+
+.color-box.selected {
+  background-color: orange;
+}
+
+.color-box.unavailable {
+  background-color: red;
+}
+.text-selected {
+  color: #4b5563;
+}
+.btn-confirm {
+  color: #4b5563;
+  background-color: #f3f4f6;
+  width: 50%;
+}
+.btn-confirm:hover {
+  color: #f3f4f6;
+  background-color: #f59e0b;
+  transition: 0.3s all ease;
+}
+.btn-reset {
+  color: #f3f4f6;
+  border-color: #f3f4f6;
+  width: 50%;
+}
+.btn-reset:hover {
+  color: #4b5563;
+  background-color: #f3f4f6;
+  transition: 0.3s all ease;
 }

@@ -14,11 +14,5 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes),
     importProvidersFrom(HttpClientModule),
     provideClientHydration(),
-    provideAnimationsAsync(),
-    providePrimeNG({
-      theme: {
-        preset: Aura,
-      },
-    }),
   ],
 };

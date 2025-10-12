@@ -1,0 +1,24 @@
+.card.selected {
+  background-color: #f59e0b !important;
+  color: white;
+}
+.card {
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+.bg-primary {
+  background-color: #0d6efd !important;
+}
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+.available {
+  background-color: #16a34a; /* green */
+  color: white;
+}
+.unavailable {
+  background-color: #dc2626; /* red */
+  color: white;
+  opacity: 0.9;
+  cursor: not-allowed;
+}

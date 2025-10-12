@@ -1,0 +1,76 @@
+<mat-tab-group (selectedTabChange)="onTabChange($event)" style="height: 400px">
+  <mat-tab label="Parter">
+    <div class="container seats-container mt-2">
+      <img
+        *ngFor="let seatObj of seatData.Parter"
+        [src]="
+          seatObj.isOccupied ?? seatObj.occupied
+            ? 'scaun_rosu.svg'
+            : 'scaun.svg'
+        "
+        [alt]="'scaun-' + (seatObj.seat ?? seatObj.seatNumber ?? seatObj.id)"
+        class="seat"
+        [ngClass]="{
+          selected:
+            selectedSeat ===
+              (seatObj.id ?? seatObj.seat ?? seatObj.seatNumber) &&
+            selectedFloor === 'Parter',
+          occupied: seatObj.isOccupied ?? seatObj.occupied
+        }"
+        (click)="
+          selectSeat('Parter', seatObj.id ?? seatObj.seat ?? seatObj.seatNumber)
+        "
+      />
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Etaj 1">
+    <div class="container seats-container mt-2">
+      <img
+        *ngFor="let seatObj of seatData['Etaj 1']"
+        [src]="
+          seatObj.isOccupied ?? seatObj.occupied
+            ? 'scaun_rosu.svg'
+            : 'scaun.svg'
+        "
+        [alt]="'scaun-' + (seatObj.seat ?? seatObj.seatNumber ?? seatObj.id)"
+        class="seat"
+        [ngClass]="{
+          selected:
+            selectedSeat ===
+              (seatObj.id ?? seatObj.seat ?? seatObj.seatNumber) &&
+            selectedFloor === 'Etaj 1',
+          occupied: seatObj.isOccupied ?? seatObj.occupied
+        }"
+        (click)="
+          selectSeat('Etaj 1', seatObj.id ?? seatObj.seat ?? seatObj.seatNumber)
+        "
+      />
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Etaj 2">
+    <div class="container seats-container mt-2">
+      <img
+        *ngFor="let seatObj of seatData['Etaj 2']"
+        [src]="
+          seatObj.isOccupied ?? seatObj.occupied
+            ? 'scaun_rosu.svg'
+            : 'scaun.svg'
+        "
+        [alt]="'scaun-' + (seatObj.seat ?? seatObj.seatNumber ?? seatObj.id)"
+        class="seat"
+        [ngClass]="{
+          selected:
+            selectedSeat ===
+              (seatObj.id ?? seatObj.seat ?? seatObj.seatNumber) &&
+            selectedFloor === 'Etaj 2',
+          occupied: seatObj.isOccupied ?? seatObj.occupied
+        }"
+        (click)="
+          selectSeat('Etaj 2', seatObj.id ?? seatObj.seat ?? seatObj.seatNumber)
+        "
+      />
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,29 @@
+.seats-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.seats-container img {
+  width: 40px;
+  height: 40px;
+}
+
+.seat {
+  width: 40px;
+  margin: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.seat:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+.seat.selected {
+  border: 2px solid #f59e0b;
+  border-radius: 8px;
+  background-color: #f3f4f6;
+}

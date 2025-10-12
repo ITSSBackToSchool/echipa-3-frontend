@@ -1,14 +1,155 @@
-<div class="container bg-light p-4">
-  <div class="main d-flex">
-    <div class="col p-4">
-      <div class="card">
-        <div class="top-card d-flex align-items-center justify-content-center">
-          salut
+<div class="container p-4">
+  <div class="main">
+    <div class="d-flex align-items-center justify-content-center">
+      <h1 class="fs-1 fw-semibold">Book now you office seat!</h1>
+    </div>
+    <div class="row">
+      <div class="col p-5">
+        <!-- CARD SEATS -->
+        <div class="card card-seats">
+          <div
+            class="top-card d-flex align-items-center justify-content-center"
+          >
+            Choose Date
+          </div>
+          <div
+            class="middle-card d-flex justify-content-center align-items-center mt-2"
+          >
+            <app-calendar-seats-component
+              (dateSelected)="onDateRangeSelected($event)"
+            ></app-calendar-seats-component>
+          </div>
+          <div
+            class="bottom-card d-flex justify-content-center align-items-center mt-2 mb-2"
+            style="height: 25%; padding: 10px"
+          >
+            <div
+              class="card card-legend d-grid text-center"
+              style="width: 80%; background-color: #f3f4f6; height: 100%"
+            >
+              <h3 class="text-legend mx-2 mt-2 fw-normal">
+                Tables on the scheme:
+              </h3>
+              <div class="d-flex mb-1">
+                <div
+                  class="col align-items-center justify-content-center d-grid"
+                >
+                  <div class="legend-item">
+                    <span class="color-box available"></span> Available
+                  </div>
+                  <div class="legend-item">
+                    <span class="color-box unavailable"></span> Unavailable
+                  </div>
+                </div>
+                <div
+                  class="col align-items-center justify-content-center d-grid"
+                >
+                  <div class="legend-item">
+                    <span class="color-box selected"></span> Selected
+                  </div>
+                  <div class="legend-item mx-1">
+                    <img
+                      src="Vector.svg"
+                      alt="Logo"
+                      class="img-fluid"
+                    />Stand-up Desk
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col p-4">
-      <div class="card" style="height: 100%; border-radius: 30px">salut</div>
+
+      <!-- CARD SEATS -->
+      <div class="col p-5">
+        <div class="card card-seats">
+          <div
+            class="top-card d-flex align-items-center justify-content-center"
+          >
+            Choose Seat
+          </div>
+
+          <div
+            class="d-flex align-items-center justify-content-center mt-3"
+            style="height: 50%"
+          >
+            <div
+              class="card mt-2"
+              style="background-color: #f3f4f6; width: 70%"
+            >
+              <app-seat-selector
+                [seatData]="seatData"
+                [selectedDate]="selectedDate"
+                (seatSelected)="onSeatSelected($event)"
+              ></app-seat-selector>
+            </div>
+          </div>
+
+          <div class="align-items-center justify-content-center d-flex mt-3">
+            <h3 class="text-seats mb-2 fw-normal">Selected seat:</h3>
+          </div>
+          <div
+            class="bottom-card d-flex justify-content-center align-items-center mb-2"
+            style="height: 10%"
+          >
+            <div
+              class="card card-legend d-grid"
+              style="width: 70%; background-color: #f3f4f6; height: 100%"
+            >
+              <div
+                class="d-flex align-items-center justify-content-center"
+                style="height: 100%"
+              >
+                <div class="row w-100">
+                  <div
+                    class="col d-flex align-items-center justify-content-center"
+                    style="height: 100%"
+                  >
+                    <p class="fw-semibold text-selected mb-0">
+                      Floor: {{ selectedFloor || "None" }}
+                    </p>
+                  </div>
+                  <div
+                    class="col d-flex align-items-center justify-content-center h-100 border-start border-2"
+                    style="height: 100%"
+                  >
+                    <p class="fw-semibold text-selected mb-0">
+                      Seat: {{ selectedSeat || "None" }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container-butoane mt-2">
+            <div class="align-items-center justify-content-center d-flex">
+              <div
+                class="col align-items-center justify-content-center d-flex ms-4"
+              >
+                <button
+                  type="button"
+                  class="btn btn-reset"
+                  (click)="resetSelection()"
+                >
+                  Reset
+                </button>
+              </div>
+              <div
+                class="col align-items-center justify-content-center d-flex me-4"
+              >
+                <button
+                  class="btn btn-confirm"
+                  type="button"
+                  (click)="confirmReservation()"
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
