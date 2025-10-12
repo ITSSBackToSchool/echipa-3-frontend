@@ -7,6 +7,8 @@ import { appRoutes } from './app/app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 bootstrapApplication(AppComponent, {
-  providers: [provideRouter(appRoutes)],
+  providers: [provideRouter(appRoutes), provideAnimationsAsync(),provideHttpClient()],
+
 }).catch((err) => console.error(err));
