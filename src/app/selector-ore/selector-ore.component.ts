@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { time } from 'node:console';
 
@@ -15,6 +15,11 @@ export class SelectorOreComponent {
     end: string;
     available: boolean;
   }> | null = null;
+
+  @Output() rangeSelected = new EventEmitter<{
+    start: string;
+    end: string;
+  } | null>();
 
   ore = [
     '9AM - 10AM',
@@ -38,12 +43,14 @@ export class SelectorOreComponent {
       this.startIndex = index;
       this.endIndex = index;
 
+      this.emitSelectedRange();
       return;
     }
 
     if (this.endIndex !== null && index === this.endIndex + 1) {
       if (this.isAvailable(index)) {
         this.endIndex = index;
+        this.emitSelectedRange();
         return;
       }
     }
@@ -51,12 +58,15 @@ export class SelectorOreComponent {
     if (this.startIndex !== null && index === this.startIndex - 1) {
       if (this.isAvailable(index)) {
         this.startIndex = index;
+        this.emitSelectedRange();
         return;
       }
     }
 
     this.startIndex = index;
     this.endIndex = index;
+
+    this.emitSelectedRange();
   }
 
   isSelected(index: number): boolean {
@@ -70,5 +80,28 @@ export class SelectorOreComponent {
     }
 
     return true;
+  }
+
+  private emitSelectedRange() {
+    if (
+      this.startIndex === null ||
+      this.endIndex === null ||
+      !this.timeslots ||
+      this.timeslots.length === 0
+    ) {
+      this.rangeSelected.emit(null);
+      return;
+    }
+
+    const start = this.timeslots[this.startIndex].start;
+    const end = this.timeslots[this.endIndex].end;
+    this.rangeSelected.emit({ start, end });
+  }
+
+  // allow parent to clear selection programmatically
+  clearSelection() {
+    this.startIndex = null;
+    this.endIndex = null;
+    this.emitSelectedRange();
   }
 }

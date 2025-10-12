@@ -21,14 +21,26 @@
           </div>
         </div>
         <div class="row m-0 p-4">
-          <app-selector-ore [timeslots]="timeslots"></app-selector-ore>
+          <app-selector-ore
+            [timeslots]="timeslots"
+            (rangeSelected)="onRangeSelected($event)"
+          ></app-selector-ore>
         </div>
         <div class="row m-0" style="height: 10%">
           <div class="col-6 ps-4">
             <button type="button" class="btn btn-reset">Reset</button>
           </div>
           <div class="col-6 text-end pe-4">
-            <button type="button" class="btn btn-confirm">Confirm</button>
+            <button
+              type="button"
+              class="btn btn-confirm"
+              (click)="confirmReservation()"
+              [disabled]="
+                !selectedRoomId || !selectedRangeStart || !selectedRangeEnd
+              "
+            >
+              Confirm
+            </button>
           </div>
         </div>
       </div>
