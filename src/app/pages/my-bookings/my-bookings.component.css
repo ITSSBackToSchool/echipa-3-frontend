@@ -39,3 +39,7 @@ h1 {
   background-color: #e0f2fe;
   border-color: none !important;
 }
+.pressed {
+  color: #f3f4f6;
+  background-color: #1f2937;
+}
