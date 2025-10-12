@@ -8,9 +8,6 @@
         <app-room-selector
           (roomSelected)="onRoomSelected($event)"
         ></app-room-selector>
-        <div class="p-2 small text-muted">
-          Selected room id: {{ selectedRoomId }}
-        </div>
       </div>
       <div class="col-4">
         <div
@@ -21,13 +18,10 @@
             <app-calendar-conference-component
               (daySelected)="onDaySelected($event)"
             ></app-calendar-conference-component>
-            <div class="small text-muted mt-2">
-              Selected day: {{ selectedDay }}
-            </div>
           </div>
         </div>
         <div class="row m-0 p-4">
-          <app-selector-ore></app-selector-ore>
+          <app-selector-ore [timeslots]="timeslots"></app-selector-ore>
         </div>
         <div class="row m-0" style="height: 10%">
           <div class="col-6 ps-4">

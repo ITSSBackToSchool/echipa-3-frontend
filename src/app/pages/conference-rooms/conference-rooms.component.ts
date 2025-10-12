@@ -16,7 +16,8 @@ import { SelectorOreComponent } from '../../selector-ore/selector-ore.component'
 })
 export class ConferenceRoomsComponent {
   selectedRoomId: number | null = null;
-  selectedDay: string | null = null; // YYYY-MM-DD
+  selectedDay: string | null = null;
+  timeslots: Array<{ start: string; end: string; available: boolean }> = [];
 
   onRoomSelected(roomId: number) {
     this.selectedRoomId = roomId;
@@ -28,14 +29,15 @@ export class ConferenceRoomsComponent {
     this.tryFetchTimeslots();
   }
 
-  // Build dateStart/dateEnd with fixed times and fetch timeslots
   async tryFetchTimeslots() {
     if (!this.selectedRoomId || !this.selectedDay) return;
     const dateStart = `${this.selectedDay}T00:00`;
     const dateEnd = `${this.selectedDay}T23:00`;
     const url = `http://localhost:8080/rooms/timeslots?roomId=${encodeURIComponent(
       String(this.selectedRoomId)
-    )}&dateStart=${encodeURIComponent(dateStart)}&dateEnd=${encodeURIComponent(dateEnd)}`;
+    )}&dateStart=${encodeURIComponent(dateStart)}&dateEnd=${encodeURIComponent(
+      dateEnd
+    )}`;
     console.log('Fetching timeslots GET', url);
     try {
       const res = await fetch(url);
@@ -46,6 +48,16 @@ export class ConferenceRoomsComponent {
       }
       const data = await res.json();
       console.log('Timeslots response:', data);
+      // normalize and store
+      if (Array.isArray(data)) {
+        this.timeslots = data.map((t: any) => ({
+          start: t.start,
+          end: t.end,
+          available: Boolean(t.available),
+        }));
+      } else {
+        this.timeslots = [];
+      }
     } catch (err) {
       console.error('Error fetching timeslots', err);
     }

@@ -1,5 +1,5 @@
-.selected {
-  background-color: #f59e0b;
+.card.selected {
+  background-color: #f59e0b !important;
   color: white;
 }
 .card {
@@ -11,4 +11,14 @@
 }
 .bg-light {
   background-color: #f8f9fa !important;
+}
+.available {
+  background-color: #16a34a; /* green */
+  color: white;
+}
+.unavailable {
+  background-color: #dc2626; /* red */
+  color: white;
+  opacity: 0.9;
+  cursor: not-allowed;
 }

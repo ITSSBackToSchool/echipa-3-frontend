@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { time } from 'node:console';
 
 @Component({
   selector: 'app-selector-ore',
@@ -9,6 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./selector-ore.component.css'],
 })
 export class SelectorOreComponent {
+  @Input() timeslots: Array<{
+    start: string;
+    end: string;
+    available: boolean;
+  }> | null = null;
+
   ore = [
     '9AM - 10AM',
     '10AM - 11AM',
@@ -22,28 +29,46 @@ export class SelectorOreComponent {
   endIndex: number | null = null;
 
   toggleSelection(index: number) {
+    const available = this.isAvailable(index);
+    if (!available) {
+      return;
+    }
+
     if (this.startIndex === null) {
       this.startIndex = index;
       this.endIndex = index;
-    } else if (
-      this.endIndex !== null &&
-      (index === this.endIndex + 1 || index === this.startIndex - 1)
-    ) {
-      if (index > this.endIndex!) {
-        this.endIndex = index;
-      } else if (index < this.startIndex!) {
-        this.startIndex = index;
-      }
-    } else {
-      this.startIndex = index;
-      this.endIndex = index;
+
+      return;
     }
-    console.log(`Acesta e start ${this.startIndex}`);
-    console.log(`Acesta e end ${this.endIndex}`);
+
+    if (this.endIndex !== null && index === this.endIndex + 1) {
+      if (this.isAvailable(index)) {
+        this.endIndex = index;
+        return;
+      }
+    }
+
+    if (this.startIndex !== null && index === this.startIndex - 1) {
+      if (this.isAvailable(index)) {
+        this.startIndex = index;
+        return;
+      }
+    }
+
+    this.startIndex = index;
+    this.endIndex = index;
   }
 
   isSelected(index: number): boolean {
     if (this.startIndex === null || this.endIndex === null) return false;
     return index >= this.startIndex && index <= this.endIndex;
+  }
+
+  isAvailable(index: number): boolean {
+    if (this.timeslots && this.timeslots.length > index) {
+      return Boolean(this.timeslots[index].available);
+    }
+
+    return true;
   }
 }
