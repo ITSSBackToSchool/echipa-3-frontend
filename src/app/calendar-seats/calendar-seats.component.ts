@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Output,
@@ -22,6 +23,7 @@ export class CalendarSeatsComponent {
   selected: Date | null = null;
   startOfDay!: Date;
   endOfDay!: Date;
+  constructor(private cdr: ChangeDetectorRef) {}
 
   // emit formatted date strings in the exact form YYYY-MM-DDTHH:mm
   @Output() dateSelected = new EventEmitter<{ start: string; end: string }>();
@@ -59,5 +61,16 @@ export class CalendarSeatsComponent {
     const dateStart = this.formatDate(this.startOfDay);
     const dateEnd = this.formatDate(this.endOfDay);
     console.log(dateStart, dateEnd);
+  }
+
+  // allow parent to programmatically set the selected date
+  setSelectedDate(date: Date | null) {
+    this.selected = date;
+    // OnPush change detection: ensure view updates when parent sets programmatically
+    try {
+      this.cdr.markForCheck();
+    } catch (e) {
+      // ignore if cdr not available
+    }
   }
 }
