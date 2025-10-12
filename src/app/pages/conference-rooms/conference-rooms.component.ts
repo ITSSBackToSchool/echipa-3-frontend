@@ -106,18 +106,34 @@ export class ConferenceRoomsComponent {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
+
       if (res.ok) {
         this.tryFetchTimeslots();
         alert('Reservation success!');
       } else {
-        const text = await res.text();
-        console.error('Reservation failed', res.status, text);
-        alert(`Reservation failed: ${text}`);
+        let errorMessage = 'Reservation failed';
+        try {
+          const json = await res.json();
+          if (json.message) {
+            errorMessage = json.message;
+          }
+        } catch (_) {}
+
+        console.error('Reservation failed', res.status, errorMessage);
+        alert(`Reservation failed: ${errorMessage}`);
         this.tryFetchTimeslots();
       }
     } catch (err) {
+      let message = 'Reservation error';
+
+      if (err instanceof Error) {
+        message = err.message;
+      } else if (typeof err === 'object' && err !== null && 'message' in err) {
+        message = (err as any).message;
+      }
+
       console.error('Error posting reservation', err);
-      alert('Reservation error');
+      alert(`Reservation error: ${message}`);
     } finally {
       try {
         if (this.selectorOre) this.selectorOre.clearSelection();
