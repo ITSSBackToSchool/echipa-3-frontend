@@ -23,8 +23,6 @@ export class ConferenceRoomsComponent {
     this.tryFetchTimeslots();
   }
 
-}
-
   onDaySelected(day: string) {
     this.selectedDay = day;
     this.tryFetchTimeslots();
@@ -52,3 +50,4 @@ export class ConferenceRoomsComponent {
       console.error('Error fetching timeslots', err);
     }
   }
+}
