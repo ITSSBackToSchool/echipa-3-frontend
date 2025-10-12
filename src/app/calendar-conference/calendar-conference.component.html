@@ -1,3 +1,3 @@
 <mat-card class="conference-seats-calendar">
-  <mat-calendar [(selected)]="selected"></mat-calendar>
+  <mat-calendar (selectedChange)="onDateChange($event)" [selected]="selected"></mat-calendar>
 </mat-card>

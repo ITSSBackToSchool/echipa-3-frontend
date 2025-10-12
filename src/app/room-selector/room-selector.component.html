@@ -1,4 +1,7 @@
-<mat-tab-group class="vertical-scroll-tabs">
+<mat-tab-group
+  class="vertical-scroll-tabs"
+  (selectedTabChange)="onTabChange($event.index)"
+>
   <mat-tab label="Parter">
     <div class="tab-content">
       <div class="row mt-2 justify-content-center">
@@ -25,48 +28,67 @@
       </div>
 
       <div class="d-grid gap-4 mt-4 justify-content-center">
-        <div
-          *ngFor="let card of cards"
-          class="card"
-          style="
-            max-width: 750px;
-            border-radius: 20px;
-            background-color: #e0f2fe;
-          "
-        >
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img
-                src="poza-lounge.jpg"
-                class="img-fluid rounded-start"
-                alt="..."
-              />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h3 class="card-title">Titlu camera: {{ card }}</h3>
-                <p class="card-text">Number of seats: seatsNumber</p>
-                <div class="row justify-content-end">
-                  <div class="col-9"></div>
-                  <div class="col-3">
-                    <button
-                      type="button"
-                      class="btn w-100"
-                      [ngClass]="{
-                        'on-click':
-                          selectedCardFloor === 'Parter' &&
-                          selectedCardNumber === card
-                      }"
-                      (click)="selectCard('Parter', card)"
-                    >
-                      Select
-                    </button>
+        <ng-container *ngIf="!fetchedForFloor['Parter']">
+          <div class="text-center p-4">Select one building and one floor</div>
+        </ng-container>
+        <ng-container *ngIf="fetchedForFloor['Parter']">
+          <ng-container
+            *ngIf="
+              roomsByFloor['Parter'] && roomsByFloor['Parter'].length;
+              else noParter
+            "
+          >
+            <div
+              *ngFor="let room of roomsByFloor['Parter']"
+              class="card"
+              style="
+                max-width: 750px;
+                border-radius: 20px;
+                background-color: #e0f2fe;
+              "
+            >
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                    src="poza-lounge.jpg"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ room.name }}</h5>
+                    <p class="card-text">
+                      Number of seats: {{ room.seatCount }}
+                    </p>
+                    <div class="row justify-content-end">
+                      <div class="col-9"></div>
+                      <div class="col-3">
+                        <button
+                          type="button"
+                          class="btn w-100"
+                          [ngClass]="{
+                            'on-click':
+                              selectedCardFloor === 'Parter' &&
+                              selectedCardNumber === room.roomId
+                          }"
+                          (click)="selectRoom(room)"
+                        >
+                          Select
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </ng-container>
+          <ng-template #noParter>
+            <div class="text-center p-4">
+              No rooms found for selected floor and building
+            </div>
+          </ng-template>
+        </ng-container>
       </div>
     </div>
   </mat-tab>
@@ -96,52 +118,67 @@
         </div>
       </div>
       <div class="d-grid gap-4 mt-4 justify-content-center">
-        <div
-          *ngFor="let card of cards"
-          class="card"
-          style="
-            max-width: 750px;
-            border-radius: 20px;
-            background-color: #e0f2fe;
-          "
-        >
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img
-                src="poza-lounge.jpg"
-                class="img-fluid rounded-start"
-                alt="..."
-              />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Card title {{ card }}</h5>
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="row justify-content-end">
-                  <div class="col-9"></div>
-                  <div class="col-3">
-                    <button
-                      type="button"
-                      class="btn w-100"
-                      [ngClass]="{
-                        'on-click':
-                          selectedCardFloor === 'Etaj 1' &&
-                          selectedCardNumber === card
-                      }"
-                      (click)="selectCard('Etaj 1', card)"
-                    >
-                      Select
-                    </button>
+        <ng-container *ngIf="!fetchedForFloor['Etaj 1']">
+          <div class="text-center p-4">Select one building and one floor</div>
+        </ng-container>
+        <ng-container *ngIf="fetchedForFloor['Etaj 1']">
+          <ng-container
+            *ngIf="
+              roomsByFloor['Etaj 1'] && roomsByFloor['Etaj 1'].length;
+              else noEtaj1
+            "
+          >
+            <div
+              *ngFor="let room of roomsByFloor['Etaj 1']"
+              class="card"
+              style="
+                max-width: 750px;
+                border-radius: 20px;
+                background-color: #e0f2fe;
+              "
+            >
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                    src="poza-lounge.jpg"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ room.name }}</h5>
+                    <p class="card-text">
+                      Number of seats: {{ room.seatCount }}
+                    </p>
+                    <div class="row justify-content-end">
+                      <div class="col-9"></div>
+                      <div class="col-3">
+                        <button
+                          type="button"
+                          class="btn w-100"
+                          [ngClass]="{
+                            'on-click':
+                              selectedCardFloor === 'Etaj 1' &&
+                              selectedCardNumber === room.roomId
+                          }"
+                          (click)="selectRoom(room)"
+                        >
+                          Select
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </ng-container>
+          <ng-template #noEtaj1>
+            <div class="text-center p-4">
+              No rooms found for selected floor and building
+            </div>
+          </ng-template>
+        </ng-container>
       </div>
     </div>
   </mat-tab>
@@ -171,53 +208,68 @@
         </div>
       </div>
       <div class="d-grid gap-4 mt-4 justify-content-center">
-        <div
-          *ngFor="let card of cards"
-          class="card"
-          style="
-            max-width: 750px;
-            border-radius: 20px;
-            background-color: #e0f2fe;
-          "
-        >
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img
-                src="poza-lounge.jpg"
-                class="img-fluid rounded-start"
-                alt="..."
-              />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Card title {{ card }}</h5>
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="row justify-content-end">
-                  <div class="col-9"></div>
-                  <div class="col-3">
-                    <button
-                      type="button"
-                      class="btn w-100"
-                      [ngClass]="{
-                        'on-click':
-                          selectedCardFloor === 'Etaj 2' &&
-                          selectedCardNumber === card
-                      }"
-                      (click)="selectCard('Etaj 2', card)"
-                    >
-                      Select
-                    </button>
+        <ng-container *ngIf="!fetchedForFloor['Etaj 2']">
+          <div class="text-center p-4">Select one building and one floor</div>
+        </ng-container>
+        <ng-container *ngIf="fetchedForFloor['Etaj 2']">
+          <ng-container
+            *ngIf="
+              roomsByFloor['Etaj 2'] && roomsByFloor['Etaj 2'].length;
+              else noEtaj2
+            "
+          >
+            <div
+              *ngFor="let room of roomsByFloor['Etaj 2']"
+              class="card"
+              style="
+                max-width: 750px;
+                border-radius: 20px;
+                background-color: #e0f2fe;
+              "
+            >
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                    src="poza-lounge.jpg"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ room.name }}</h5>
+                    <p class="card-text">
+                      Number of seats: {{ room.seatCount }}
+                    </p>
+                    <div class="row justify-content-end">
+                      <div class="col-9"></div>
+                      <div class="col-3">
+                        <button
+                          type="button"
+                          class="btn w-100"
+                          [ngClass]="{
+                            'on-click':
+                              selectedCardFloor === 'Etaj 2' &&
+                              selectedCardNumber === room.roomId
+                          }"
+                          (click)="selectRoom(room)"
+                        >
+                          Select
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </ng-container>
+          <ng-template #noEtaj2>
+            <div class="text-center p-4">
+              No rooms found for selected floor and building
+            </div>
+          </ng-template>
+        </ng-container>
       </div>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+    </div></mat-tab
+  ></mat-tab-group
+>
