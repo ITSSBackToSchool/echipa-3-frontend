@@ -43,15 +43,24 @@
       <div
         *ngFor="let r of reservations"
         class="card mb-3"
-        style="max-height: 220px"
+        style="align-items: start !important"
       >
         <div class="row g-0 align-items-stretch">
           <div class="col-md-4">
             <img
-              src="pexels-quark-studio-1159039-3201921.jpg"
+              [src]="
+                r.seatId != null
+                  ? 'poza-my-bookings.png'
+                  : 'pexels-quark-studio-1159039-3201921.jpg'
+              "
               class="img-fluid rounded-start"
-              alt="poza"
-              style="height: 100%; object-fit: cover"
+              [alt]="r.seatId != null ? 'seat' : 'room'"
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+              "
             />
           </div>
           <div class="col-md-8 fundal-card">
@@ -61,7 +70,7 @@
                 <ng-container *ngIf="r.roomId != null; else seatTitle">
                   {{ r.roomName || "Room" }}
                 </ng-container>
-                <ng-template #seatTitle>Seat {{ r.seatNumber }}</ng-template>
+                <ng-template #seatTitle>{{ r.seatNumber }}</ng-template>
               </h5>
 
               <p class="card-text flex-grow-1">

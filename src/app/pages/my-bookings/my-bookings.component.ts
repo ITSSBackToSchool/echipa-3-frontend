@@ -9,14 +9,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './my-bookings.component.css',
 })
 export class MyBookingsComponent implements OnInit {
-  // status values: ACTIVE | COMPLETED | CANCELLED
-  selected: string = 'ACTIVE'; // butonul selectat inițial
+  selected: string = 'ACTIVE';
   reservations: any[] = [];
 
   select(status: string) {
     this.selected = status;
     console.log('Buton selectat:', status);
-    // fetch reservations for selected status
+
     this.fetchReservations(status);
   }
 
@@ -53,7 +52,6 @@ export class MyBookingsComponent implements OnInit {
 
     if (!confirm('Are you sure you want to cancel this reservation?')) return;
 
-    // track cancelling ids to disable UI
     this.cancellingIds.add(id);
     try {
       const url = `http://localhost:8080/reservations/${encodeURIComponent(
@@ -62,7 +60,7 @@ export class MyBookingsComponent implements OnInit {
       const res = await fetch(url, { method: 'PUT' });
       if (res.ok) {
         alert('Reservation cancelled');
-        // refresh current list
+
         this.fetchReservations(this.selected);
       } else {
         let text: string;
@@ -82,6 +80,5 @@ export class MyBookingsComponent implements OnInit {
     }
   }
 
-  // track which reservation ids are being cancelled to disable buttons
   cancellingIds = new Set<number>();
 }
