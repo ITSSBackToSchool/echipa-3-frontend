@@ -98,7 +98,7 @@ export class ConferenceRoomsComponent {
       reservationDateEnd: this.selectedRangeEnd,
     };
 
-    const url = 'http://localhost:8080/reservations/rooms';
+    const url = 'http://localhost:8090/reservations/rooms';
     console.log('POST reservation', url, body);
     try {
       const res = await fetch(url, {
@@ -147,7 +147,7 @@ export class ConferenceRoomsComponent {
     if (!this.selectedRoomId || !this.selectedDay) return;
     const dateStart = `${this.selectedDay}T00:00`;
     const dateEnd = `${this.selectedDay}T23:00`;
-    const url = `http://localhost:8080/rooms/timeslots?roomId=${encodeURIComponent(
+    const url = `http://localhost:8090/rooms/timeslots?roomId=${encodeURIComponent(
       String(this.selectedRoomId)
     )}&dateStart=${encodeURIComponent(dateStart)}&dateEnd=${encodeURIComponent(
       dateEnd

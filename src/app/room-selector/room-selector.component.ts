@@ -78,7 +78,7 @@ export class RoomSelectorComponent {
   @Output() roomSelected = new EventEmitter<number>();
 
   async fetchRooms(floor: string, building: string): Promise<void> {
-    const base = 'http://localhost:8080/rooms/roomByFloorAndBuilding';
+    const base = 'http://localhost:8090/rooms/roomByFloorAndBuilding';
     const url = `${base}?floorName=${encodeURIComponent(
       floor
     )}&buildingName=${encodeURIComponent(building)}`;

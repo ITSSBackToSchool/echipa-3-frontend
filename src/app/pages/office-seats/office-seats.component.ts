@@ -61,7 +61,7 @@ export class OfficeSeatsComponent {
       reservationDateEnd: this.selectedRangeEnd + ':00',
     };
 
-    const url = 'http://localhost:8080/reservations/seats';
+    const url = 'http://localhost:8090/reservations/seats';
     console.log('POST reservation', url, body);
     this.http.post(url, body).subscribe({
       next: () => {
@@ -117,7 +117,7 @@ export class OfficeSeatsComponent {
       console.log('Floor id:', floorId);
       console.log('Date start:', start);
       console.log('Date end:', end);
-      const url = `http://localhost:8080/seats/freeSeats?floorId=${floorId}&dateStart=${start}&dateEnd=${end}`;
+      const url = `http://localhost:8090/seats/freeSeats?floorId=${floorId}&dateStart=${start}&dateEnd=${end}`;
       console.log('Apel API:', url);
 
       this.http.get(url).subscribe({
