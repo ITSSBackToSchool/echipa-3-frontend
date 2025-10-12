@@ -98,7 +98,6 @@ export class SelectorOreComponent {
     this.rangeSelected.emit({ start, end });
   }
 
-  // allow parent to clear selection programmatically
   clearSelection() {
     this.startIndex = null;
     this.endIndex = null;

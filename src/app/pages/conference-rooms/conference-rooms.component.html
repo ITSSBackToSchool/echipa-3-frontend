@@ -16,6 +16,7 @@
         >
           <div class="col-auto">
             <app-calendar-conference-component
+              [selectedDay]="selectedDay"
               (daySelected)="onDaySelected($event)"
             ></app-calendar-conference-component>
           </div>
@@ -28,7 +29,13 @@
         </div>
         <div class="row m-0" style="height: 10%">
           <div class="col-6 ps-4">
-            <button type="button" class="btn btn-reset">Reset</button>
+            <button
+              type="button"
+              class="btn btn-reset"
+              (click)="resetSelection()"
+            >
+              Reset
+            </button>
           </div>
           <div class="col-6 text-end pe-4">
             <button

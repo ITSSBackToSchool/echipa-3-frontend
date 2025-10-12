@@ -48,6 +48,25 @@ export class ConferenceRoomsComponent {
     );
   }
 
+  resetSelection() {
+    try {
+      if (this.selectorOre) this.selectorOre.clearSelection();
+    } catch (e) {
+      console.warn('Could not clear selector on reset', e);
+    }
+
+    this.selectedRangeStart = null;
+    this.selectedRangeEnd = null;
+
+    const now = new Date();
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    this.selectedDay = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(
+      now.getDate()
+    )}`;
+
+    this.tryFetchTimeslots();
+  }
+
   private normalizeToSeconds(dt: string): string {
     if (!dt) return dt;
 
@@ -127,7 +146,7 @@ export class ConferenceRoomsComponent {
       }
       const data = await res.json();
       console.log('Timeslots response:', data);
-      // normalize and store
+
       if (Array.isArray(data)) {
         this.timeslots = data.map((t: any) => ({
           start: t.start,
