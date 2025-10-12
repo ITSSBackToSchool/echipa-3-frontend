@@ -9,7 +9,7 @@ export class WeatherApiService {
   constructor(private http: HttpClient) {}
 
   getWeather(): Observable<any> {
-    // This should be an HTTP GET, not a router navigation
+    
     return this.http.get('/api/weather');
   }
 }
