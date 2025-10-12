@@ -46,24 +46,42 @@ export class MyBookingsComponent implements OnInit {
   }
 
   async cancelReservation(id: number) {
+    if (id === null || id === undefined) {
+      alert('Reservation id missing');
+      return;
+    }
+
     if (!confirm('Are you sure you want to cancel this reservation?')) return;
+
+    // track cancelling ids to disable UI
+    this.cancellingIds.add(id);
     try {
       const url = `http://localhost:8080/reservations/${encodeURIComponent(
         String(id)
       )}`;
-      const res = await fetch(url, { method: 'DELETE' });
+      const res = await fetch(url, { method: 'PUT' });
       if (res.ok) {
         alert('Reservation cancelled');
         // refresh current list
         this.fetchReservations(this.selected);
       } else {
-        const text = await res.text();
+        let text: string;
+        try {
+          text = await res.text();
+        } catch (e) {
+          text = `Status ${res.status}`;
+        }
         console.error('Cancel failed', res.status, text);
         alert(`Cancel failed: ${text}`);
       }
     } catch (err) {
       console.error('Error cancelling reservation', err);
-      alert('Cancel error');
+      alert(`Cancel error: ${err}`);
+    } finally {
+      this.cancellingIds.delete(id);
     }
   }
+
+  // track which reservation ids are being cancelled to disable buttons
+  cancellingIds = new Set<number>();
 }

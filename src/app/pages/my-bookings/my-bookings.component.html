@@ -96,8 +96,12 @@
                   *ngIf="r.status === 'ACTIVE'"
                   class="btn btn-cancel btn-lg"
                   (click)="cancelReservation(r.id)"
+                  [disabled]="cancellingIds.has(r.id)"
                 >
-                  Cancel
+                  <ng-container *ngIf="cancellingIds.has(r.id); else canLabel"
+                    >Cancelling...</ng-container
+                  >
+                  <ng-template #canLabel>Cancel</ng-template>
                 </button>
               </div>
             </div>
