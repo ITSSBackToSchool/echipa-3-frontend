@@ -20,20 +20,42 @@
       </header>
     </section>
 
-    <!-- === CARD ALBASTRU “Următoarea vizită” (schelet weather-card) === -->
+    <!-- === CARD ALBASTRU “Următoarea vizită” === -->
     <section class="weather-card home-card">
       <h2 class="home-title">Următoarea ta vizită la birou:</h2>
 
-      <div class="home-visit-box">
+      <!-- Loading / Error (opțional) -->
+      <div *ngIf="loading" class="home-visit-box">
         <div class="home-visit-line">
-          <div class="home-visit-title">Biroul 3 - Parter</div>
-          <div class="home-visit-sub">Aleea Țibleș nr.3</div>
-        </div>
-        <div class="home-visit-line home-visit-line--split">
-          <div class="home-visit-title">9 Octombrie</div>
-          <div class="home-visit-sub home-visit-sub--caps">9AM–17PM</div>
+          <div class="home-visit-title">Se încarcă...</div>
         </div>
       </div>
+      <div *ngIf="!loading && error" class="home-visit-box">
+        <div class="home-visit-line">
+          <div class="home-visit-title">{{ error }}</div>
+        </div>
+      </div>
+
+      <!-- Conținut -->
+      <div *ngIf="!loading && !error && vm.exists; else noVisit" class="home-visit-box">
+        <div class="home-visit-line">
+          <div class="home-visit-title">{{ vm.title }}</div>
+          <div class="home-visit-sub" *ngIf="vm.sub">{{ vm.sub }}</div>
+        </div>
+        <div class="home-visit-line home-visit-line--split">
+          <div class="home-visit-title">{{ vm.dayLabel }}</div>
+          <div class="home-visit-sub home-visit-sub--caps">{{ vm.timeLabel }}</div>
+        </div>
+      </div>
+
+      <!-- Fallback când nu există vizite viitoare -->
+      <ng-template #noVisit>
+        <div class="home-visit-box">
+          <div class="home-visit-line">
+            <div class="home-visit-title">Nu ai nicio vizită viitoare programată.</div>
+          </div>
+        </div>
+      </ng-template>
 
       <div class="home-cta">
         <a class="home-btn" routerLink="/my-bookings">Vezi rezervările</a>
