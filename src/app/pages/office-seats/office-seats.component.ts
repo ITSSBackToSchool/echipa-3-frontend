@@ -27,6 +27,7 @@ export class OfficeSeatsComponent {
   seatData: Record<string, { seat: number; isOccupied: boolean }[]> = {};
 
   @ViewChild(SeatSelectorComponent) seatSelector?: SeatSelectorComponent;
+  @ViewChild(CalendarSeatsComponent) calendar?: CalendarSeatsComponent;
 
   constructor(private http: HttpClient) {}
 
@@ -98,7 +99,12 @@ export class OfficeSeatsComponent {
     this.selectedRangeStart = this.formatDate(start);
     this.selectedRangeEnd = this.formatDate(end);
     this.selectedDate = start;
-
+    // update calendar UI to show today's date
+    try {
+      if (this.calendar) this.calendar.setSelectedDate(start);
+    } catch (e) {
+      console.warn('Could not update calendar on reset', e);
+    }
     this.fetchSeatData(this.selectedRangeStart, this.selectedRangeEnd);
   }
 
