@@ -94,9 +94,7 @@
             {{ w.current?.precipitation ?? 0 | number : "1.0-1"
             }}{{ w.current_units?.precipitation || " mm" }}
           </div>
-          <div class="s-sub">
-            {{ (w.current?.precipitation ?? 0) > 0 ? "Rain" : "—" }}
-          </div>
+
           <svg class="s-icon" viewBox="0 0 64 64" aria-hidden="true">
             <path
               d="M20 38a12 12 0 1 1 23.2-4H44a8 8 0 0 1 0 16H20a8 8 0 0 1 0-16z"
@@ -116,11 +114,7 @@
             {{ w.current?.wind_speed_10m | number : "1.0-0" }} km/h
           </div>
           <div class="s-sub">
-            <ng-container
-              *ngIf="w.current?.wind_direction_10m !== undefined; else noDir"
-            >
-              {{ w.current?.wind_direction_10m }}°
-            </ng-container>
+
             <ng-template #noDir></ng-template>
           </div>
           <svg class="s-icon" viewBox="0 0 64 64" aria-hidden="true">
