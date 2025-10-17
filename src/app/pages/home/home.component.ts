@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
+const COMPANY_ADDRESS = 'Aleea Țibleș nr.3';
+
 type Reservation = {
   id: number;
   status: string;                // 'ACTIVE' | 'COMPLETED' | 'CANCELLED'/'CANCELED'
@@ -170,6 +172,6 @@ export class HomeComponent implements OnInit {
       timeLabel = `${fmt(s)}–${fmt(e)}`;
     }
 
-    return { exists: true, isOffice, title, sub: '', dayLabel, timeLabel };
+    return { exists: true, isOffice, title, sub: COMPANY_ADDRESS, dayLabel, timeLabel };
   }
 }
