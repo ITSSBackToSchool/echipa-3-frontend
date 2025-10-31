@@ -1,13 +1,12 @@
 <div class="container p-4">
   <div class="main">
 
-    <!-- Header în gradient (tema Weather) -->
-    <header class="traffic-header mb-4">
+    <!-- Header -->
+    <header class="traffic-header mb-4 d-flex align-items-center justify-content-between">
       <div>
         <h1 class="traffic-title fw-semibold mb-1">Traffic info</h1>
         <p class="traffic-subtle m-0">Verific timpul și rutele către birou</p>
       </div>
-      <!-- (opțional) poți adăuga un icon mare aici, dacă vrei consistență cu soarele din Weather -->
     </header>
 
     <!-- Plan your route -->
@@ -15,73 +14,73 @@
       <h5 class="fw-semibold mb-3" style="color:#4B5563">Plan your route</h5>
 
       <div class="mb-3">
-        <!-- My Location -->
         <div class="input-group">
           <span class="input-group-text bg-white border-end-0">
-            <img src="moved_location_RoundedFill.svg" alt="Location" style="width:38px;height:35px" loading="lazy">
+            <img src="/moved_location_RoundedFill.svg" alt="Location" style="width:38px;height:35px" loading="lazy">
           </span>
-          <input type="text" class="form-control border-start-0" placeholder="My Location" />
+          <input type="text" class="form-control border-start-0" [value]="myLocationText" readonly />
         </div>
 
-        <!-- Current Hour -->
         <div class="input-group mt-2">
           <span class="input-group-text bg-white border-end-0">
-            <img src="avg_time_RoundedFill.svg" alt="Time" style="width:38px;height:35px" loading="lazy">
+            <img src="/avg_time_RoundedFill.svg" alt="Time" style="width:38px;height:35px" loading="lazy">
           </span>
-          <input type="text" class="form-control border-start-0" placeholder="Current Hour" />
+          <input type="text" class="form-control border-start-0" [value]="currentHourText" readonly />
         </div>
       </div>
 
-      <button class="btn btn-dark rounded-pill px-4 d-inline-flex align-items-center gap-2">
-        <img src="manage_search_RoundedFill.svg" alt="Search" style="width:42px;height:42px" loading="lazy">
-        <span>Search</span>
+      <button class="btn btn-dark rounded-pill px-4 d-inline-flex align-items-center gap-2"
+              (click)="onSearch()" [disabled]="loading">
+        <img src="/manage_search_RoundedFill.svg" alt="Search" style="width:42px;height:42px" loading="lazy">
+        <span *ngIf="!loading">Search</span>
+        <span *ngIf="loading">Searching...</span>
       </button>
+
+      <div class="mt-2 text-danger" *ngIf="error">{{ error }}</div>
     </section>
 
     <!-- Travel summary strip -->
     <section class="summary-strip p-4 mb-4 d-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center gap-3">
-        <img src="car.svg" alt="Car" style="width:134px;height:126px" loading="lazy">
-        <div class="fs-2 fw-semibold" style="color:#4B5563">21 min</div>
+        <img src="/car.svg" alt="Car" style="width:134px;height:126px" loading="lazy">
+        <div class="fs-2 fw-semibold" style="color:#4B5563">{{ durationText }}</div>
       </div>
       <div class="fs-3 fw-semibold d-flex align-items-center gap-2" style="color:#4B5563">
-        <img src="bookmark_check_RoundedFill.svg" alt="Distance OK" style="width:48px;height:54px" loading="lazy">
-        10.1km
+        <img src="/bookmark_check_RoundedFill.svg" alt="Distance OK" style="width:48px;height:54px" loading="lazy">
+        {{ distanceText }}
       </div>
     </section>
 
     <!-- Incidents -->
     <section class="row g-4">
-      <!-- Incident 1 -->
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6" *ngFor="let inc of incidents">
         <div class="incident-card p-4 h-100">
           <div class="d-flex align-items-start gap-3">
-            <img src="warning_RoundedFill.svg" alt="Warning" style="width:97px;height:92px" loading="lazy">
+            <img [src]="iconSrcFor(inc.type)"
+                 [alt]="iconAltFor(inc.type)"
+                 style="width:97px;height:92px" loading="lazy">
             <div>
-              <div class="fw-semibold" style="color:#4B5563">Traffic diverted at Unirii Square</div>
+              <div class="fw-semibold" style="color:#4B5563">{{ inc.title }}</div>
               <ul class="mb-0 ps-3">
-                <li class="traffic-muted">12 min – Reported 5 min ago</li>
-                <li class="traffic-muted">1,1 km ahead</li>
+                <li class="traffic-muted">
+                  • {{ inc.type === 'Construction' ? 'Roadworks' : 'Congestion' }}
+                  <ng-container *ngIf="inc.startTime"> – {{ minutesAgo(inc.startTime) }}</ng-container>
+                </li>
+                <li class="traffic-muted"
+                    *ngIf="inc.lat != null && inc.lon != null && myLat != null && myLon != null">
+                  • {{ distanceAhead(myLat!, myLon!, inc.lat!, inc.lon!) }}
+                </li>
+                <li class="traffic-muted" *ngIf="inc.severity !== undefined">
+                  Severity: {{ inc.severity }}
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Incident 2 -->
-      <div class="col-12 col-md-6">
-        <div class="incident-card p-4 h-100">
-          <div class="d-flex align-items-start gap-3">
-            <img src="airline_stops_RoundedFill.svg" alt="Diversion" style="width:90px;height:91px" loading="lazy">
-            <div>
-              <div class="fw-semibold" style="color:#4B5563">Road diversion on Unirii Boulevard</div>
-              <ul class="mb-0 ps-3">
-                <li class="traffic-muted">+5 min – Reported 30 min ago</li>
-                <li class="traffic-muted">900 m ahead</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div *ngIf="incidents.length === 0 && !loading" class="text-muted">
+        No recent incidents (last 2h).
       </div>
     </section>
 
