@@ -4,14 +4,14 @@ import { RouterLink } from '@angular/router';
 
 type Reservation = {
   id: number;
-  status: string;                // 'ACTIVE' | 'COMPLETED' | 'CANCELLED'/'CANCELED'
-  seatId?: number | null;        // Office dacă NU e null
-  roomId?: number | null;        // Conference dacă NU e null
+  status: string; // 'ACTIVE' | 'COMPLETED' | 'CANCELLED'/'CANCELED'
+  seatId?: number | null; // Office dacă NU e null
+  roomId?: number | null; // Conference dacă NU e null
   seatNumber?: string | null;
   roomName?: string | null;
-  buildingName?: string | null;  // ex: "Biroul 3"
-  floorName?: string | null;     // ex: "Parter"
-  reservationDateStart: string;  // 'YYYY-MM-DD' sau 'YYYY-MM-DD HH:mm[:ss]' / ISO
+  buildingName?: string | null; // ex: "Biroul 3"
+  floorName?: string | null; // ex: "Parter"
+  reservationDateStart: string; // 'YYYY-MM-DD' sau 'YYYY-MM-DD HH:mm[:ss]' / ISO
   reservationDateEnd?: string | null;
 };
 
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
     this.error = null;
 
     try {
-      const url = `http://localhost:8090/reservations/user?userId=1&status=ACTIVE`;
+      const url = `http://localhost:8080/reservations/user?userId=1&status=ACTIVE`;
       const res = await fetch(url);
       if (!res.ok) {
         this.error = `Eroare la citirea rezervărilor: ${res.status}`;
@@ -54,7 +54,11 @@ export class HomeComponent implements OnInit {
       }
 
       const data = await res.json();
-      const list: Reservation[] = Array.isArray(data) ? data : (data ? [data] : []);
+      const list: Reservation[] = Array.isArray(data)
+        ? data
+        : data
+        ? [data]
+        : [];
 
       const next = this.pickNextVisit(list);
       this.vm = next ? this.toViewModel(next) : { exists: false };
@@ -86,9 +90,11 @@ export class HomeComponent implements OnInit {
     return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
   }
   private isSameDay(a: Date, b: Date) {
-    return a.getFullYear() === b.getFullYear() &&
-           a.getMonth() === b.getMonth() &&
-           a.getDate() === b.getDate();
+    return (
+      a.getFullYear() === b.getFullYear() &&
+      a.getMonth() === b.getMonth() &&
+      a.getDate() === b.getDate()
+    );
   }
 
   /** Alege următoarea vizită.
@@ -102,8 +108,8 @@ export class HomeComponent implements OnInit {
     const now = new Date();
 
     const rows = list
-      .filter(r => (r.status ?? '').toUpperCase() === 'ACTIVE')
-      .map(r => {
+      .filter((r) => (r.status ?? '').toUpperCase() === 'ACTIVE')
+      .map((r) => {
         const isConference = r.roomId != null; // cheie: detectăm direct Conference
         const isOffice = !isConference;
 
@@ -112,21 +118,50 @@ export class HomeComponent implements OnInit {
           const day = this.parseLocalDate(r.reservationDateStart);
           if (!day) return null;
           const dayOnly = this.startOfDay(day);
-          const start = new Date(dayOnly.getFullYear(), dayOnly.getMonth(), dayOnly.getDate(), 9, 0, 0);
-          const end   = new Date(dayOnly.getFullYear(), dayOnly.getMonth(), dayOnly.getDate(), 17, 0, 0);
+          const start = new Date(
+            dayOnly.getFullYear(),
+            dayOnly.getMonth(),
+            dayOnly.getDate(),
+            9,
+            0,
+            0
+          );
+          const end = new Date(
+            dayOnly.getFullYear(),
+            dayOnly.getMonth(),
+            dayOnly.getDate(),
+            17,
+            0,
+            0
+          );
           return { r, isOffice, dayOnly, start, end };
         } else {
           // Conference: folosim start/end reale
           const s = this.parseLocalDate(r.reservationDateStart);
-          const e = this.parseLocalDate(r.reservationDateEnd ?? r.reservationDateStart);
+          const e = this.parseLocalDate(
+            r.reservationDateEnd ?? r.reservationDateStart
+          );
           if (!s || !e) return null;
           const dayOnly = this.startOfDay(s);
           return { r, isOffice: false, dayOnly, start: s, end: e };
         }
       })
-      .filter((x): x is { r: Reservation; isOffice: boolean; dayOnly: Date; start: Date; end: Date } => !!x)
+      .filter(
+        (
+          x
+        ): x is {
+          r: Reservation;
+          isOffice: boolean;
+          dayOnly: Date;
+          start: Date;
+          end: Date;
+        } => !!x
+      )
       // Filtru viitor (cel care ți-a făcut Conference să apară corect înainte):
-      .filter(x => x.end.getTime() >= now.getTime() || x.start.getTime() >= now.getTime());
+      .filter(
+        (x) =>
+          x.end.getTime() >= now.getTime() || x.start.getTime() >= now.getTime()
+      );
 
     if (rows.length === 0) return null;
 
@@ -151,22 +186,34 @@ export class HomeComponent implements OnInit {
     const floor = (r.floorName ?? '').trim();
     const titleBase = [building, floor].filter(Boolean).join(' - ');
     const title = isOffice
-      ? (titleBase || 'Birou')
-      : (r.roomName || titleBase || 'Conference Room');
+      ? titleBase || 'Birou'
+      : r.roomName || titleBase || 'Conference Room';
 
     let dayLabel = '';
     let timeLabel = '';
 
     if (isOffice) {
       const day = this.parseLocalDate(r.reservationDateStart)!;
-      dayLabel = day.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long' });
+      dayLabel = day.toLocaleDateString('ro-RO', {
+        day: 'numeric',
+        month: 'long',
+      });
       timeLabel = '9AM–17PM';
     } else {
       const s = this.parseLocalDate(r.reservationDateStart)!;
-      const e = this.parseLocalDate(r.reservationDateEnd ?? r.reservationDateStart)!;
-      dayLabel = s.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long' });
+      const e = this.parseLocalDate(
+        r.reservationDateEnd ?? r.reservationDateStart
+      )!;
+      dayLabel = s.toLocaleDateString('ro-RO', {
+        day: 'numeric',
+        month: 'long',
+      });
       const fmt = (x: Date) =>
-        x.toLocaleTimeString('ro-RO', { hour: '2-digit', minute: '2-digit', hour12: false });
+        x.toLocaleTimeString('ro-RO', {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        });
       timeLabel = `${fmt(s)}–${fmt(e)}`;
     }
 

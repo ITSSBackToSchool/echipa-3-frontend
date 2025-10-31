@@ -25,7 +25,7 @@ export class MyBookingsComponent implements OnInit {
 
   async fetchReservations(status: string) {
     try {
-      const url = `http://localhost:8090/reservations/user?userId=1&status=${encodeURIComponent(
+      const url = `http://localhost:8080/reservations/user?userId=1&status=${encodeURIComponent(
         status
       )}`;
       const res = await fetch(url);
@@ -54,7 +54,7 @@ export class MyBookingsComponent implements OnInit {
 
     this.cancellingIds.add(id);
     try {
-      const url = `http://localhost:8090/reservations/${encodeURIComponent(
+      const url = `http://localhost:8080/reservations/${encodeURIComponent(
         String(id)
       )}`;
       const res = await fetch(url, { method: 'PUT' });
