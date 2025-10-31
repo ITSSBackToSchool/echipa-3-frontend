@@ -9,7 +9,9 @@
             Bine ai revenit,<br />
             <span class="fw-semibold">User</span> !
           </h1>
-          <div class="wc-condition">Astăzi lucrezi / nu lucrezi de la birou</div>
+            <div class="wc-condition">
+              {{ worksToday ? 'Azi lucrezi de la birou' : 'Azi nu lucrezi de la birou' }}
+            </div>
         </div>
 
         <div class="wc-header-right">

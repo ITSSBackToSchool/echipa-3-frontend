@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
+const COMPANY_ADDRESS = 'Aleea Țibleș nr.3';
+
 type Reservation = {
   id: number;
   status: string; // 'ACTIVE' | 'COMPLETED' | 'CANCELLED'/'CANCELED'
@@ -36,6 +38,9 @@ export class HomeComponent implements OnInit {
   loading = false;
   error: string | null = null;
 
+  /** ⇩ nou: mesajul din header */
+  worksToday = false;
+
   async ngOnInit(): Promise<void> {
     await this.loadNextVisit();
   }
@@ -50,6 +55,7 @@ export class HomeComponent implements OnInit {
       if (!res.ok) {
         this.error = `Eroare la citirea rezervărilor: ${res.status}`;
         this.vm = { exists: false };
+        this.worksToday = false;
         return;
       }
 
@@ -60,12 +66,17 @@ export class HomeComponent implements OnInit {
         ? [data]
         : [];
 
+      // următoarea vizită (regulile de prioritate)
       const next = this.pickNextVisit(list);
       this.vm = next ? this.toViewModel(next) : { exists: false };
+
+      // ⇩ calculează dacă LUCREZI AZI (există rezervare de azi ne-terminată)
+      this.worksToday = this.computeWorksToday(list);
     } catch (e) {
       console.error('loadNextVisit error', e);
       this.error = 'Nu am putut încărca rezervările.';
       this.vm = { exists: false };
+      this.worksToday = false;
     } finally {
       this.loading = false;
     }
@@ -102,15 +113,21 @@ export class HomeComponent implements OnInit {
    *   - compar ziua (calendar day)
    *   - dacă e aceeași zi → Office > Conference
    *   - tie-breaker: ora de start
-   *  Filtru viitor (varianta care îți afișa Conference înainte): păstrăm dacă end>=now sau start>=now.
+   *  Filtru viitor: păstrăm dacă end>=now sau start>=now.
    */
   private pickNextVisit(list: Reservation[]): Reservation | null {
     const now = new Date();
 
     const rows = list
+<<<<<<< HEAD
       .filter((r) => (r.status ?? '').toUpperCase() === 'ACTIVE')
       .map((r) => {
         const isConference = r.roomId != null; // cheie: detectăm direct Conference
+=======
+      .filter(r => (r.status ?? '').toUpperCase() === 'ACTIVE')
+      .map(r => {
+        const isConference = r.roomId != null; // detectăm direct Conference
+>>>>>>> main
         const isOffice = !isConference;
 
         if (isOffice) {
@@ -146,6 +163,7 @@ export class HomeComponent implements OnInit {
           return { r, isOffice: false, dayOnly, start: s, end: e };
         }
       })
+<<<<<<< HEAD
       .filter(
         (
           x
@@ -162,10 +180,13 @@ export class HomeComponent implements OnInit {
         (x) =>
           x.end.getTime() >= now.getTime() || x.start.getTime() >= now.getTime()
       );
+=======
+      .filter((x): x is { r: Reservation; isOffice: boolean; dayOnly: Date; start: Date; end: Date } => !!x)
+      .filter(x => x.end.getTime() >= now.getTime() || x.start.getTime() >= now.getTime());
+>>>>>>> main
 
     if (rows.length === 0) return null;
 
-    // Sortare: întâi ziua, apoi Office > Conference doar dacă e aceeași zi, apoi ora
     rows.sort((a, b) => {
       if (!this.isSameDay(a.dayOnly, b.dayOnly)) {
         return a.dayOnly.getTime() - b.dayOnly.getTime();
@@ -175,6 +196,36 @@ export class HomeComponent implements OnInit {
     });
 
     return rows[0].r;
+  }
+
+  /** Determină dacă „azi lucrezi de la birou”. */
+  private computeWorksToday(list: Reservation[]): boolean {
+    const now = new Date();
+    const today = this.startOfDay(now);
+
+    for (const r of list) {
+      if ((r.status ?? '').toUpperCase() !== 'ACTIVE') continue;
+
+      if (r.roomId != null) {
+        // Conference: azi dacă start e azi și nu s-a terminat încă
+        const s = this.parseLocalDate(r.reservationDateStart);
+        const e = this.parseLocalDate(r.reservationDateEnd ?? r.reservationDateStart);
+        if (!s || !e) continue;
+        if (this.isSameDay(this.startOfDay(s), today) && e.getTime() > now.getTime()) {
+          return true;
+        }
+      } else {
+        // Office: zi întreagă 09:00–17:00
+        const d = this.parseLocalDate(r.reservationDateStart);
+        if (!d) continue;
+        const start = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 9, 0, 0);
+        const end   = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 17, 0, 0);
+        if (this.isSameDay(this.startOfDay(d), today) && end.getTime() > now.getTime()) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   /** Mapare către UI (cardul albastru) */
@@ -217,6 +268,6 @@ export class HomeComponent implements OnInit {
       timeLabel = `${fmt(s)}–${fmt(e)}`;
     }
 
-    return { exists: true, isOffice, title, sub: '', dayLabel, timeLabel };
+    return { exists: true, isOffice, title, sub: COMPANY_ADDRESS, dayLabel, timeLabel };
   }
 }
