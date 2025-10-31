@@ -17,10 +17,10 @@ type IncidentVM = {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './traffic-info.component.html',
-  styleUrls: ['./traffic-info.component.scss'],
+  styleUrls: ['./traffic-info.component.css']
 })
 export class TrafficInfoComponent implements OnInit, OnDestroy {
-  // UI state
+  // UI
   loading = false;
   error?: string;
 
@@ -28,7 +28,7 @@ export class TrafficInfoComponent implements OnInit, OnDestroy {
   myLocationText = 'My Location';
   currentHourText = '';
 
-  // numeric coords (pt. calc distanță)
+  // coordonate numerice pentru calcule
   myLat: number | null = null;
   myLon: number | null = null;
 
@@ -36,7 +36,7 @@ export class TrafficInfoComponent implements OnInit, OnDestroy {
   durationText = '--';
   distanceText = '--';
 
-  // incidents
+  // incidente
   incidents: IncidentVM[] = [];
 
   private subs: Subscription[] = [];
@@ -62,18 +62,16 @@ export class TrafficInfoComponent implements OnInit, OnDestroy {
         const start = `${lat},${lon}`;
         this.myLocationText = start;
 
-        const s1 = this.api.getDirections(start, true, 'car')
-          .subscribe({
-            next: (res) => this.applyDirections(res),
-            error: (err) => this.error = String(err),
-          });
+        const s1 = this.api.getDirections(start, true, 'car').subscribe({
+          next: (res) => this.applyDirections(res),
+          error: (err) => this.error = String(err),
+        });
 
-        const s2 = this.api.getIncidents(start)
-          .subscribe({
-            next: (res) => this.applyIncidents(res),
-            error: (err) => this.error = String(err),
-            complete: () => this.loading = false,
-          });
+        const s2 = this.api.getIncidents(start).subscribe({
+          next: (res) => this.applyIncidents(res),
+          error: (err) => this.error = String(err),
+          complete: () => this.loading = false,
+        });
 
         this.subs.push(s1, s2);
       })
@@ -84,7 +82,6 @@ export class TrafficInfoComponent implements OnInit, OnDestroy {
   }
 
   // ---------- helpers ----------
-
   private applyDirections(res: DirectionsResponse) {
     const sum = res?.routes?.[0]?.summary;
     if (!sum) return;
@@ -98,7 +95,7 @@ export class TrafficInfoComponent implements OnInit, OnDestroy {
     (res.features || []).forEach(f => {
       const p = f.properties || {};
       const g = f.geometry;
-      const coords = (g?.coordinates as [number, number] | undefined);
+      const coords = (g?.coordinates as [number, number] | undefined); // [lon, lat]
 
       const title = (p.title && p.title.trim().length)
         ? p.title!.trim()
@@ -108,13 +105,13 @@ export class TrafficInfoComponent implements OnInit, OnDestroy {
         type: (p.incidentType as any) || 'Incident',
         title,
         startTime: p.startTime,
-        lat: coords ? coords[1] : undefined, // [lon, lat]
+        lat: coords ? coords[1] : undefined,
         lon: coords ? coords[0] : undefined,
         severity: p.severity,
       });
     });
 
-    // filtrează ultimele 2 ore
+    // păstrează doar ultimele 2 ore
     const now = new Date();
     const recent = list.filter(it => {
       if (!it.startTime) return false;
@@ -123,7 +120,7 @@ export class TrafficInfoComponent implements OnInit, OnDestroy {
       return diffMin >= 0 && diffMin <= 120;
     });
 
-    // ordonează după cele mai recente
+    // sortare recență
     recent.sort((a, b) => {
       const ta = a.startTime ? new Date(a.startTime).getTime() : 0;
       const tb = b.startTime ? new Date(b.startTime).getTime() : 0;
@@ -144,7 +141,7 @@ export class TrafficInfoComponent implements OnInit, OnDestroy {
           let lat = pos.coords.latitude;
           let lon = pos.coords.longitude;
 
-          // fallback dacă emu oferă Googleplex
+          // fallback dacă emu dă Googleplex
           const near = (a: number, b: number, eps = 0.0008) => Math.abs(a - b) < eps;
           if (near(lat, 37.4219983) && near(lon, -122.084)) { lat = 44.4325; lon = 26.1039; }
 
@@ -189,10 +186,11 @@ export class TrafficInfoComponent implements OnInit, OnDestroy {
     return 2*R*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   }
 
+  // icoane din public/
   iconSrcFor(type: string): string {
     return type === 'Construction'
-      ? '/airline_stops_RoundedFill.svg'  // roadworks
-      : '/warning_RoundedFill.svg';       // congestion (default)
+      ? '/airline_stops_RoundedFill.svg'   // roadworks
+      : '/warning_RoundedFill.svg';        // congestion
   }
   iconAltFor(type: string): string {
     return type === 'Construction' ? 'Roadworks' : 'Warning';

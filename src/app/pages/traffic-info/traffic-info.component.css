@@ -73,3 +73,29 @@
 .icon-40 { width: 40px; height: 40px; }
 
 .accent-warning { filter: saturate(1) brightness(1); }
+
+/* === ADĂUGIRI: bullet unic + scroll pentru listă === */
+
+/* un singur bullet: scoatem bullets native și punem unul custom */
+.incident-card ul { list-style: none; padding-left: 0; margin: 0; }
+.incident-card li { position: relative; padding-left: 1rem; line-height: 1.3; }
+.incident-card li::before {
+  content: "•";
+  position: absolute; left: 0; top: 0;
+  color: #6b7a8c; /* același gri ca .traffic-muted */
+}
+
+/* zona incidentelor devine scrollabilă înăuntrul paginii,
+   ca să nu iasă din chenarul alb */
+.incidents-scroll {
+  max-height: 60vh; /* ajustează 55–70vh după layout */
+  overflow-y: auto;
+  padding-right: .5rem;
+}
+
+/* scrollbar discret (webkit) – opțional */
+.incidents-scroll::-webkit-scrollbar { width: 8px; }
+.incidents-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.2);
+  border-radius: 4px;
+}

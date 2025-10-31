@@ -51,8 +51,8 @@
       </div>
     </section>
 
-    <!-- Incidents -->
-    <section class="row g-4">
+    <!-- Incidents (scrollable area) -->
+    <section class="row g-4 incidents-scroll">
       <div class="col-12 col-md-6" *ngFor="let inc of incidents">
         <div class="incident-card p-4 h-100">
           <div class="d-flex align-items-start gap-3">
@@ -61,14 +61,14 @@
                  style="width:97px;height:92px" loading="lazy">
             <div>
               <div class="fw-semibold" style="color:#4B5563">{{ inc.title }}</div>
-              <ul class="mb-0 ps-3">
+              <ul class="mb-0">
                 <li class="traffic-muted">
-                  • {{ inc.type === 'Construction' ? 'Roadworks' : 'Congestion' }}
+                  {{ inc.type === 'Construction' ? 'Roadworks' : 'Congestion' }}
                   <ng-container *ngIf="inc.startTime"> – {{ minutesAgo(inc.startTime) }}</ng-container>
                 </li>
                 <li class="traffic-muted"
                     *ngIf="inc.lat != null && inc.lon != null && myLat != null && myLon != null">
-                  • {{ distanceAhead(myLat!, myLon!, inc.lat!, inc.lon!) }}
+                  {{ distanceAhead(myLat!, myLon!, inc.lat!, inc.lon!) }}
                 </li>
                 <li class="traffic-muted" *ngIf="inc.severity !== undefined">
                   Severity: {{ inc.severity }}
@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      <div *ngIf="incidents.length === 0 && !loading" class="text-muted">
+      <div *ngIf="incidents.length === 0 && !loading" class="text-muted px-2">
         No recent incidents (last 2h).
       </div>
     </section>
