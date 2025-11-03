@@ -1,7 +1,6 @@
 <div class="container p-4">
   <div class="main">
     <section class="weather-card">
-
       <!-- Header -->
       <header class="wc-header h-50" *ngIf="data as w; else loading">
         <div class="wc-header-left">
@@ -33,7 +32,11 @@
         </div>
 
         <div class="wc-header-right">
-          <img [src]="currentIcon" alt="current-weather" style="width:110px;height:110px" />
+          <img
+            [src]="currentIcon"
+            alt="current-weather"
+            class="header-icon icon-amber"
+          />
         </div>
       </header>
 
@@ -41,7 +44,7 @@
       <div class="wc-days" *ngIf="data as w">
         <div class="wc-day" *ngFor="let _ of w.daily?.time; let i = index">
           <span class="d-name">{{ dayName(w.daily.time[i]) }}</span>
-          <img class="d-icon" [src]="days[i]?.icon" alt="icon" style="width:20px;height:20px" />
+          <img class="d-icon icon-amber" [src]="days[i]?.icon" alt="icon" />
           <span class="d-temp">
             {{ w.daily?.temperature_2m_max?.[i] | number:'1.0-0' }}° C
           </span>

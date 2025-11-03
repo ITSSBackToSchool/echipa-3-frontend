@@ -83,13 +83,10 @@
   justify-content: center;
 }
 
-.icon-xxl {
+/* icon mare din header când folosești <img> */
+.header-icon {
   width: clamp(72px, 10vw, 120px);
   height: auto;
-  stroke: #ffb300;
-  fill: #ffca28;
-  stroke-width: 4;
-  stroke-linecap: round;
 }
 
 /* === Pastilele cu zile – grilă egală === */
@@ -120,9 +117,11 @@
   margin-bottom: 6px;
 }
 
+/* icon în tile-uri */
 .wc-day .d-icon {
   display: block;
-  font-size: 18px;
+  width: 20px;
+  height: 20px;
 }
 
 .wc-day .d-temp {
@@ -177,6 +176,12 @@
   stroke: #6b7a8c;
   stroke-width: 3;
   stroke-linecap: round;
+}
+
+/* === Amber (F59E0B) pentru iconuri SVG randate ca <img> === */
+.icon-amber {
+  filter: invert(58%) sepia(90%) saturate(905%) hue-rotate(357deg)
+          brightness(98%) contrast(98%);
 }
 
 /* === Responsive === */

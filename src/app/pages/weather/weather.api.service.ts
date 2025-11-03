@@ -19,13 +19,13 @@ export interface WeatherResponse {
     precipitation: number;
     surface_pressure: number;
     wind_speed_10m?: number;
-    weather_code: number;       // ⬅️ important
+    weather_code: number;
   };
   daily: {
-    time: string[];             // ISO dates
+    time: string[];
     temperature_2m_max: number[];
     temperature_2m_min: number[];
-    weather_code: number[];     // ⬅️ important
+    weather_code: number[];
   };
 }
 
