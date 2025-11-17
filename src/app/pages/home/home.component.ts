@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     this.error = null;
 
     try {
-      const url = `http://localhost:8090/reservations/user?userId=1&status=ACTIVE`;
+      const url = `http://localhost:8080/reservations/user?userId=1&status=ACTIVE`;
       const res = await fetch(url);
       if (!res.ok) {
         this.error = `Eroare la citirea rezervărilor: ${res.status}`;
